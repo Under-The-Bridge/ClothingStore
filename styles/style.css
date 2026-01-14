@@ -1,0 +1,81 @@
+@font-face {
+    font-family: mainFont;
+    font-weight: 100;
+    src: url(../fonts/RFDewiExtended-Light.ttf);
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    transition: 1s ease;
+}
+
+header{
+    font-family: mainFont;
+    height: 10vh;
+    background-color: #121214;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+#header-logo{
+    width: 4.5vw;
+    height: 3.5vh;
+    background-size: cover;
+    background-image: url(../images/logo.svg);
+}
+
+#header-items{
+    width: 71%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#header-btns{
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+}
+
+#header-profile-items{
+    width: 17.5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .header-profile-item{
+        width: 1.75vh;
+        height: 1.75vh;
+        background-size: cover;
+    }
+    .header-profile-item:nth-child(1){background-image: url(../images/lupa.svg);}
+    .header-profile-item:nth-child(2){background-image: url(../images/star.svg);}
+    .header-profile-item:nth-child(3){background-image: url(../images/user.svg);}
+    .header-profile-item:nth-child(4){background-image: url(../images/korzina.svg);}
+    .header-profile-item:nth-child(5){background-image: url(../images/userpfp.svg);}
+}
+
+
+#panel{
+    height: 77vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #canvas{
+        width: 80%;
+        height: 85%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url(../images/man.png);
+        background-size: cover;
+        border-radius: 7px;
+        #canvas-padding{
+            width: 90%;
+            height: 85%;    
+        }
+    }
+}
