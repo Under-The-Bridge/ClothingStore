@@ -1,17 +1,42 @@
 @font-face {
-    font-family: mainFont;
-    font-weight: 100;
+    font-family: ExtLight;
     src: url(../fonts/RFDewiExtended-Light.ttf);
 }
-
+@font-face {
+    font-family: ExpBlack;
+    src: url(../fonts/RFDewiExpanded-Black.ttf);
+}
+@font-face {
+    font-family: ExpUltraBold;
+    src: url(../fonts/RFDewiExpanded-Ultrabold.ttf);
+}
+@font-face {
+    font-family: ExtRegular;
+    src: url(../fonts/RFDewiExtended-Regular.ttf);
+}
+@font-face {
+    font-family: ExtUltraBold;
+    src: url(../fonts/RFDewiExtended-Ultrabold.ttf);
+}
+@font-face {
+    font-family: ExtBold;
+    src: url(../fonts/RFDewiExtended-Bold.ttf);
+}
 *{
     margin: 0;
     padding: 0;
     transition: 1s ease;
+    user-select: none;
+}
+
+h2{
+    font-family: ExpBlack;
+    font-size: 31px;
+    text-transform: uppercase;
 }
 
 header{
-    font-family: mainFont;
+    font-family: ExtLight;
     height: 10vh;
     background-color: #121214;
     color: white;
@@ -40,6 +65,16 @@ header{
     align-items: center;
     font-size: 14px;
 }
+.header-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+    p{
+        color: rgb(78, 78, 78);
+        font-size: 75%;
+    }
+}
 
 #header-profile-items{
     width: 17.5%;
@@ -59,6 +94,7 @@ header{
 }
 
 
+
 #panel{
     height: 77vh;
     display: flex;
@@ -74,8 +110,111 @@ header{
         background-size: cover;
         border-radius: 7px;
         #canvas-padding{
-            width: 90%;
-            height: 85%;    
+            width: 89%;
+            height: 85%;
+        }
+        #inner-panel{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 40%;
+            height: 100%;
+        }
+        #panel-text{
+            padding-top: 50px;
+            height: 357px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            div:nth-child(1){
+                font-family: ExpBlack;
+                font-size: 51px;
+                text-transform: uppercase;
+            }
+            div:nth-child(2){
+                font-family: ExtRegular;
+                font-size: 19px;
+            }
+            div:nth-child(3){
+                display: flex;
+                justify-content: space-evenly;
+                align-items: center;
+                width: 46%;
+                height: 66px;
+                border-radius: 5px;
+                background-color: #121214;
+                color: white;
+                font-family: ExpUltraBold;
+                font-size: 12px;
+                text-transform: uppercase;
+            }
+        }
+    }
+    #arrows{
+        width: 27.5%;
+        display: flex;
+        justify-content: space-between;
+        div{
+            width: 67px;
+            height: 67px;
+            border-radius: 100%;
+            display: grid;
+            place-content: center;
+            font-size: 15px;
+        }
+        div:nth-child(1){background-color: white;}
+        div:nth-child(2){background-color: #F0F2F6;}
+    }
+}
+
+.item-show-elem{
+    display: flex;
+    justify-content: center;
+    >div{
+        width: 71%;
+    }
+}
+.item-show-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span{
+        height: 30px;
+        display: flex;
+        gap: 10px;
+        font-family: ExtUltraBold;
+        font-size: 14px;
+        border-bottom: 2px black solid;
+        text-transform: uppercase;
+        align-items: center;        
+    }
+}
+.items-to-show{
+    height: 369px;
+    display: flex;
+    justify-content: space-between;
+    .item-card{
+        width: 318px;
+        display: flex;
+        flex-direction: column;
+        .star{
+            align-self: flex-end;
+            position: absolute;
+            font-size: 32px;
+        }
+        .item-card-text{
+            p:nth-child(1){
+                font-family: ExtBold;
+                font-size: 19px;
+            }
+            p:nth-child(2){
+                font-family: ExtRegular;
+                font-size: 14px;
+            }
+        }
+        img{
+            width: 318px;
+            height: 318px;
         }
     }
 }
