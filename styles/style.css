@@ -1,220 +1,488 @@
 @font-face {
-    font-family: ExtLight;
-    src: url(../fonts/RFDewiExtended-Light.ttf);
+  font-family: ExtLight;
+  src: url(../fonts/RFDewiExtended-Light.ttf);
 }
 @font-face {
-    font-family: ExpBlack;
-    src: url(../fonts/RFDewiExpanded-Black.ttf);
+  font-family: ExpBlack;
+  src: url(../fonts/RFDewiExpanded-Black.ttf);
 }
 @font-face {
-    font-family: ExpUltraBold;
-    src: url(../fonts/RFDewiExpanded-Ultrabold.ttf);
+  font-family: ExpUltraBold;
+  src: url(../fonts/RFDewiExpanded-Ultrabold.ttf);
 }
 @font-face {
-    font-family: ExtRegular;
-    src: url(../fonts/RFDewiExtended-Regular.ttf);
+  font-family: ExtRegular;
+  src: url(../fonts/RFDewiExtended-Regular.ttf);
 }
 @font-face {
-    font-family: ExtUltraBold;
-    src: url(../fonts/RFDewiExtended-Ultrabold.ttf);
+  font-family: ExtUltraBold;
+  src: url(../fonts/RFDewiExtended-Ultrabold.ttf);
 }
 @font-face {
-    font-family: ExtBold;
-    src: url(../fonts/RFDewiExtended-Bold.ttf);
+  font-family: ExtBold;
+  src: url(../fonts/RFDewiExtended-Bold.ttf);
 }
-*{
-    margin: 0;
-    padding: 0;
-    transition: 1s ease;
-    user-select: none;
+@font-face {
+  font-family: ExtSemiBold;
+  src: url(../fonts/RFDewiExtended-Semibold.ttf);
+}
+* {
+  margin: 0;
+  padding: 0;
+  user-select: none;
 }
 
-h2{
-    font-family: ExpBlack;
-    font-size: 31px;
-    text-transform: uppercase;
+h2 {
+  font-family: ExpBlack;
+  font-size: 31px;
+  text-transform: uppercase;
 }
 
-header{
-    font-family: ExtLight;
-    height: 10vh;
-    background-color: #121214;
-    color: white;
-    display: flex;
-    justify-content: center;
+header {
+  font-family: ExtLight;
+  height: 10vh;
+  background-color: #121214;
+  color: white;
+  display: flex;
+  justify-content: center;
 }
 
-#header-logo{
-    width: 4.5vw;
-    height: 3.5vh;
+#header-logo {
+  width: 4.5vw;
+  height: 3.5vh;
+  background-size: cover;
+  background-image: url(../images/logo.svg);
+}
+
+#header-items {
+  width: 71%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#header-btns {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.header-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  p {
+    color: rgb(78, 78, 78);
+    font-size: 75%;
+  }
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+#header-profile-items {
+  width: 17.5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .header-profile-item {
+    width: 1.75vh;
+    height: 1.75vh;
     background-size: cover;
-    background-image: url(../images/logo.svg);
+  }
+  .header-profile-item:nth-child(1) {
+    background-image: url(../images/lupa.svg);
+  }
+  .header-profile-item:nth-child(2) {
+    background-image: url(../images/star.svg);
+  }
+  .header-profile-item:nth-child(3) {
+    background-image: url(../images/user.svg);
+  }
+  .header-profile-item:nth-child(4) {
+    background-image: url(../images/korzina.svg);
+  }
+  .header-profile-item:nth-child(5) {
+    background-image: url(../images/userpfp.svg);
+  }
 }
 
-#header-items{
-    width: 71%;
+/* main{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    flex-direction: column;
+    gap:10px;
+} */
 
-#header-btns{
-    width: 55%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-}
-.header-btn{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 5px;
-    p{
-        color: rgb(78, 78, 78);
-        font-size: 75%;
-    }
-}
-
-#header-profile-items{
-    width: 17.5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .header-profile-item{
-        width: 1.75vh;
-        height: 1.75vh;
-        background-size: cover;
-    }
-    .header-profile-item:nth-child(1){background-image: url(../images/lupa.svg);}
-    .header-profile-item:nth-child(2){background-image: url(../images/star.svg);}
-    .header-profile-item:nth-child(3){background-image: url(../images/user.svg);}
-    .header-profile-item:nth-child(4){background-image: url(../images/korzina.svg);}
-    .header-profile-item:nth-child(5){background-image: url(../images/userpfp.svg);}
-}
-
-
-
-#panel{
-    height: 77vh;
+#panel {
+  height: 77vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  #canvas {
+    width: 80%;
+    height: 85%;
     display: flex;
     justify-content: center;
     align-items: center;
-    #canvas{
-        width: 80%;
-        height: 85%;
+    background-image: url(../images/man.png);
+    background-size: cover;
+    border-radius: 7px;
+    #canvas-padding {
+      width: 89%;
+      height: 85%;
+    }
+    #inner-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 40%;
+      height: 100%;
+    }
+    #panel-text {
+      padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      #panel-text-h1 {
+        font-family: ExpBlack;
+        font-size: 51px;
+        text-transform: uppercase;
+        line-height: 60px;
+      }
+      #panel-text-h2 {
+        font-family: ExtRegular;
+        font-size: 19px;
+      }
+      #panel-text-btn {
+        display: flex;
+        align-items: center;
+        width: 46%;
+        height: 66px;
+        border-radius: 5px;
+        background-color: #121214;
+        color: white;
+        font-family: ExpUltraBold;
+        font-size: 12px;
+        text-transform: uppercase;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-content: stretch;
+        flex-wrap: wrap;
+        P {
+          height: 5%;
+        }
+      }
+    }
+  }
+  #arrows {
+    width: 27.5%;
+    display: flex;
+    justify-content: space-between;
+    div {
+      width: 67px;
+      height: 67px;
+      border-radius: 100%;
+      display: grid;
+      place-content: center;
+      font-size: 15px;
+    }
+    div:nth-child(1) {
+      background-color: white;
+    }
+    div:nth-child(2) {
+      background-color: #f0f2f6;
+    }
+  }
+}
+
+#items {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+}
+
+.item-show-elem {
+  display: flex;
+  justify-content: center;
+  > div {
+    width: 71%;
+  }
+}
+.item-show-text {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  span {
+    height: 30px;
+    display: flex;
+    gap: 10px;
+    font-family: ExtUltraBold;
+    font-size: 14px;
+    border-bottom: 2px black solid;
+    text-transform: uppercase;
+    align-items: center;
+  }
+}
+.items-to-show {
+  height: 369px;
+  display: flex;
+  justify-content: space-between;
+  .item-card {
+    width: 318px;
+    display: flex;
+    flex-direction: column;
+    .star {
+      align-self: flex-end;
+      position: absolute;
+      font-size: 32px;
+    }
+    .item-card-text {
+      p:nth-child(1) {
+        font-family: ExtBold;
+        font-size: 19px;
+      }
+      p:nth-child(2) {
+        font-family: ExtRegular;
+        font-size: 14px;
+      }
+    }
+    img {
+      width: 318px;
+      height: 318px;
+    }
+  }
+}
+
+.items-pagination {
+  height: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    width: 20%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 140%;
+
+    .dots {
+      opacity: 0.7;
+    }
+
+    .dots :hover {
+      opacity: 1;
+      font-size: 150%;
+    }
+    div:first-child {
+      opacity: 1;
+    }
+    div:last-child {
+      opacity: 0.3;
+    }
+  }
+}
+
+.dropdown * {
+  border-radius: 0px;
+  border: none;
+  font-family: ExtLight;
+  font-size: 14px;
+}
+.dropdown button {
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+  color: white;
+}
+.dropdown ul {
+  background: #121214;
+  color: white;
+}
+.dropdown li :hover {
+  background: #121214;
+  color: white;
+  border-bottom: #49d0ff 1px solid;
+  border-top: #49d0ff 1px solid;
+}
+
+#panel-two {
+  height: 77vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  #canvas-two {
+    width: 80%;
+    height: 85%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    background: linear-gradient(
+      to right,
+      #0d99f8 0.94%,
+      #21a0f8 5.36%,
+      #54b5ff 27.35%,
+      #0dbbf8 79%,
+      #0ddbf8 97.53%
+    );
+    background-size: cover;
+    border-radius: 7px;
+    #canvas-padding {
+      width: 89%;
+      height: 85%;
+      display: flex;
+      align-items: center;
+    }
+    #inner-panel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 95%;
+    }
+    #phone {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-content: center;
+    }
+    #panel-text {
+      padding-top: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      #panel-text-h1 {
+        font-family: ExpBlack;
+        font-size: 51px;
+        text-transform: uppercase;
+        line-height: 60px;
+      }
+      #panel-text-h2 {
+        font-family: ExtRegular;
+        font-size: 19px;
+      }
+      #panel-text-btn {
+        display: flex;
+        align-items: center;
+        width: 40%;
+        height: 66px;
+        border-radius: 5px;
+        background-color: #121214;
+        color: white;
+        font-family: ExpUltraBold;
+        font-size: 12px;
+        text-transform: uppercase;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-content: stretch;
+        flex-wrap: wrap;
+        P {
+          height: 5%;
+        }
+      }
+
+      #panel-text-h3 {
+        display: flex;
+        justify-content: space-between;
+        .panel-numbers {
+          display: flex;
+          gap: 20px;
+          align-items: center;
+          div:first-child {
+            width: 77px;
+            height: 77px;
+            background-image: url(../images/circle.svg);
+            background-size: cover;
+            display: grid;
+            place-content: center;
+            font-family: ExtBold;
+            font-size: 24px;
+          }
+          div:last-child {
+            width: 70%;
+            font-family: ExtSemiBold;
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#panel-Xwear {
+  transform: translateY(-36%);
+  height: 895px;
+  background: linear-gradient(to bottom, #f5f5f5, #ffffff, #f5f5f5);
+  #bgXwear {
+    width: 100%;
+    height: 100%;
+    background-image: url(../images/bgXwear.svg);
+    display: flex;
+    justify-content: center;
+    #bgPadding {
+      width: 70%;
+      height: 85%;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      color: #121214;
+      #info-text {
+        width: 61%;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+      #info-panel{
+        width: 29%;
+        height: 52.5%;
+      }
+      #panel{
         display: flex;
         justify-content: center;
         align-items: center;
-        background-image: url(../images/man.png);
-        background-size: cover;
-        border-radius: 7px;
-        #canvas-padding{
-            width: 89%;
-            height: 85%;
+        >div{
+            width: 75%;
         }
-        #inner-panel{
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 40%;
-            height: 100%;
-        }
-        #panel-text{
-            padding-top: 50px;
-            height: 357px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            div:nth-child(1){
-                font-family: ExpBlack;
-                font-size: 51px;
-                text-transform: uppercase;
-            }
-            div:nth-child(2){
-                font-family: ExtRegular;
-                font-size: 19px;
-            }
-            div:nth-child(3){
-                display: flex;
-                justify-content: space-evenly;
-                align-items: center;
-                width: 46%;
-                height: 66px;
-                border-radius: 5px;
-                background-color: #121214;
-                color: white;
-                font-family: ExpUltraBold;
-                font-size: 12px;
-                text-transform: uppercase;
-            }
-        }
-    }
-    #arrows{
-        width: 27.5%;
+      }
+      .info-panel-text{
+        width: 110%;
         display: flex;
-        justify-content: space-between;
-        div{
-            width: 67px;
-            height: 67px;
-            border-radius: 100%;
-            display: grid;
-            place-content: center;
-            font-size: 15px;
+        .logo-info:nth-child(1){
+            width: 49px;
+            height: 49px;
+            background-image: url(../images/logo1.svg);
+            background-size: cover;
         }
-        div:nth-child(1){background-color: white;}
-        div:nth-child(2){background-color: #F0F2F6;}
-    }
-}
-
-.item-show-elem{
-    display: flex;
-    justify-content: center;
-    >div{
-        width: 71%;
-    }
-}
-.item-show-text{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    span{
-        height: 30px;
-        display: flex;
-        gap: 10px;
-        font-family: ExtUltraBold;
-        font-size: 14px;
-        border-bottom: 2px black solid;
-        text-transform: uppercase;
-        align-items: center;        
-    }
-}
-.items-to-show{
-    height: 369px;
-    display: flex;
-    justify-content: space-between;
-    .item-card{
-        width: 318px;
-        display: flex;
-        flex-direction: column;
-        .star{
-            align-self: flex-end;
-            position: absolute;
-            font-size: 32px;
+        #text{
+            width: 50px;
         }
-        .item-card-text{
-            p:nth-child(1){
-                font-family: ExtBold;
-                font-size: 19px;
-            }
-            p:nth-child(2){
-                font-family: ExtRegular;
-                font-size: 14px;
-            }
-        }
-        img{
-            width: 318px;
-            height: 318px;
-        }
+      }
+      #panel{
+        width: 100%;
+        height: 107%;
+        background-color: white;
+        box-shadow: 0px 0px 25px rgb(209, 209, 209);
+        border-radius: 5px;
+      }
     }
+    #text-h1 {
+      width: 70%;
+      font-family: ExpBlack;
+      font-size: 36px;
+      text-transform: uppercase;
+      line-height: 50px;
+    }
+    .text-h2 {
+      font-family: ExtRegular;
+      font-size: 16px;
+      line-height: 29px;
+    }
+  }
 }
