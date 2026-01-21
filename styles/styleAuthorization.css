@@ -1,0 +1,31 @@
+main{
+  display: flex;
+  justify-content: center;
+}
+
+#container{
+  width: 72%;
+}
+
+#path{
+  font-size: 13px;
+  font-family: ExtRegular;
+  color: #8C8F96;
+  span{
+    color: #121214;
+  }
+}
+
+#forms-elem{
+  h1{
+    font-family: ExpBlack;
+    font-size: 31px;
+  }
+  #forms{
+    display: flex;
+    justify-content: space-between;
+  }
+  form{
+    border-radius: 1px;
+  }
+}

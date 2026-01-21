@@ -41,9 +41,13 @@
   margin: 0;
   padding: 0;
   user-select: none;
-  p{
+  p {
     margin-bottom: 0;
   }
+}
+
+main{
+  min-height: 81vh;
 }
 
 h2 {
@@ -66,6 +70,7 @@ header {
   height: 3.5vh;
   background-size: cover;
   background-image: url(../images/logo.svg);
+  cursor: pointer;
 }
 
 #header-items {
@@ -96,6 +101,10 @@ header {
 
 .dropdown:hover .dropdown-menu {
   display: block;
+  button:hover {
+    transition: 0.25s ease-out;
+    text-decoration: underline 2px solid #49d0ff;
+  }
 }
 
 #header-profile-items {
@@ -108,6 +117,7 @@ header {
     width: 1.75vh;
     height: 1.75vh;
     background-size: cover;
+    cursor: pointer;
   }
 
   .header-profile-item:nth-child(1) {
@@ -127,7 +137,13 @@ header {
   }
 
   .header-profile-item:nth-child(5) {
-    background-image: url(../images/userpfp.svg);
+    display: grid;
+    place-content: center;
+    /* background-image: url(../images/userpfp.svg); */
+    a {
+      color: white;
+      text-decoration: none;
+    }
   }
 }
 
@@ -196,14 +212,8 @@ header {
         font-family: ExpUltraBold;
         font-size: 12px;
         text-transform: uppercase;
-        flex-direction: row;
         justify-content: space-evenly;
-        align-content: stretch;
-        flex-wrap: wrap;
-
-        P {
-          height: 5%;
-        }
+        cursor: pointer;
       }
     }
   }
@@ -220,6 +230,7 @@ header {
       display: grid;
       place-content: center;
       font-size: 15px;
+      cursor: pointer;
     }
 
     div:nth-child(1) {
@@ -244,7 +255,7 @@ header {
   display: flex;
   justify-content: center;
 
-  >div {
+  > div {
     width: 72%;
   }
 }
@@ -257,6 +268,7 @@ header {
 
   /* align-items: center; */
   span {
+    cursor: pointer;
     height: 30px;
     display: flex;
     gap: 10px;
@@ -282,9 +294,12 @@ header {
       align-self: flex-end;
       position: absolute;
       font-size: 32px;
+      cursor: pointer;
     }
 
     .item-card-text {
+      cursor: pointer;
+
       p:nth-child(1) {
         font-family: ExtBold;
         font-size: 19px;
@@ -309,15 +324,20 @@ header {
   justify-content: center;
   align-items: center;
 
-  >div {
+  > div {
     width: 20%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 140%;
+    font-size: 100%;
 
     .dots {
       opacity: 0.7;
+      cursor: pointer;
+    }
+    .chosen {
+      font-size: 140%;
+      opacity: 1;
     }
 
     .dots :hover {
@@ -327,10 +347,12 @@ header {
 
     div:first-child {
       opacity: 1;
+      cursor: pointer;
     }
 
     div:last-child {
       opacity: 0.3;
+      cursor: pointer;
     }
   }
 }
@@ -376,12 +398,14 @@ header {
     justify-content: center;
     align-items: center;
     z-index: 2;
-    background: linear-gradient(to right,
-        #0d99f8 0.94%,
-        #21a0f8 5.36%,
-        #54b5ff 27.35%,
-        #0dbbf8 79%,
-        #0ddbf8 97.53%);
+    background: linear-gradient(
+      to right,
+      #0d99f8 0.94%,
+      #21a0f8 5.36%,
+      #54b5ff 27.35%,
+      #0dbbf8 79%,
+      #0ddbf8 97.53%
+    );
     background-size: cover;
     border-radius: 7px;
 
@@ -436,14 +460,8 @@ header {
         font-family: ExpUltraBold;
         font-size: 12px;
         text-transform: uppercase;
-        flex-direction: row;
         justify-content: space-evenly;
-        align-content: stretch;
-        flex-wrap: wrap;
-
-        P {
-          height: 5%;
-        }
+        cursor: pointer;
       }
 
       #panel-text-h3 {
@@ -477,7 +495,7 @@ header {
   }
 }
 
-#back-panel{
+#back-panel {
   position: relative;
   top: -325px;
   height: 650px;
@@ -522,7 +540,7 @@ header {
         box-shadow: 0px 0px 25px rgb(209, 209, 209);
         border-radius: 5px;
 
-        >div {
+        > div {
           height: 90%;
           width: 75%;
           display: flex;
@@ -560,7 +578,6 @@ header {
             font-family: ExpBlack;
             font-size: 13px;
             text-transform: uppercase;
-
           }
 
           div:last-child {
@@ -569,7 +586,6 @@ header {
           }
         }
       }
-
     }
 
     #text-h1 {
@@ -586,7 +602,7 @@ header {
       line-height: 29px;
     }
   }
-  #chat-logo{
+  #chat-logo {
     position: absolute;
     left: 92.5%;
     top: 50%;
@@ -596,7 +612,8 @@ header {
     place-content: center;
     background-color: #121214;
     border-radius: 100%;
-    div{
+    cursor: pointer;
+    div {
       width: 35px;
       height: 35px;
       background-size: cover;
@@ -605,126 +622,140 @@ header {
   }
 }
 
-#blog{
+#blog {
   height: 675px;
-  .item-blog{
+  .item-blog {
     width: 433px;
-    .item-blog-text{
-      >p:nth-child(1){
+    cursor: pointer;
+    .item-blog-text {
+      > p:nth-child(1) {
         font-family: ExtBold;
         font-size: 23px;
+        line-height: 30px;
       }
-      >p:nth-child(2){
+      > p:nth-child(2) {
+        height: 90px;
         font-family: ExtRegular;
         font-size: 15px;
+        padding-top: 10px;
+        color: #303030;
       }
-      >div{
+      > div {
         display: flex;
         justify-content: space-between;
-        p:first-child{
+        p:first-child {
           font-family: ExtUltraBold;
           font-size: 14px;
           text-transform: uppercase;
         }
-        p:last-child{
+        p:last-child {
           font-family: ExtRegular;
           font-size: 11px;
-          color: #8C8F96;
+          color: #8c8f96;
         }
       }
     }
   }
 }
-#items-blog{
+#items-blog {
   display: flex;
   justify-content: space-between;
 }
-.underline{
+.underline {
   text-decoration: underline #0ddbf8 2px;
 }
 
-footer{
+footer {
   height: 371px;
   background-color: #121214;
   display: flex;
   justify-content: center;
   align-items: center;
-  #footer-panel{
+  #footer-panel {
     width: 72%;
     height: 275px;
     color: white;
     display: flex;
     justify-content: space-between;
-    >div{
+    > div {
       height: 100%;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
     }
   }
-  ul{
+  ul {
     display: flex;
     flex-direction: column;
     gap: 10px;
     list-style: none;
-    list-style-position:outside;
+    list-style-position: outside;
     padding: 0;
-    li{
+    li {
       font-size: 15px;
       line-height: 28px;
+      cursor: pointer;
     }
-    li:first-child{
+    li:first-child {
       font-family: ExpBlack;
       text-transform: uppercase;
+      cursor: default;
     }
-    li{font-family: ExtRegular;}
+    li {
+      font-family: ExtRegular;
+    }
   }
-  #footer-logo{
+  #footer-logo {
     width: 99px;
     height: 40px;
     background-image: url(../images/xwear.svg);
   }
-  #logo-site{
+  #logo-site {
     width: 140px;
     height: 24px;
     background-image: url(../images/readycode_logo.svg);
   }
 }
-.footer-column:nth-child(3){
+.footer-column:nth-child(3) {
   line-height: 15px;
-  li:nth-child(2){
+  li:nth-child(2) {
     font-family: ExtRegular;
     text-decoration: underline;
   }
-  li:nth-child(3){
+  li:nth-child(3) {
     font-family: ExtSemiBold;
   }
-  li:nth-child(4), li:nth-child(6){
+  li:nth-child(4),
+  li:nth-child(6) {
     font-family: ExpUltraBold;
     font-size: 12px;
     text-transform: uppercase;
   }
-  img{
+  img {
     width: 30px;
     height: 30px;
   }
 }
-.footer-column:nth-child(4){
+.footer-column:nth-child(4) {
   width: 274px;
-  li>div{
+  li {
+    cursor: default;
+  }
+  li > div {
     height: 40px;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #707076;
   }
-  input{
+  input {
     background: none;
     border: none;
   }
-  input:focus, button:focus{
+  input:focus,
+  button:focus {
     outline: none;
   }
-  button{
+  button {
     width: 29px;
     height: 29px;
     background: white;
@@ -733,16 +764,18 @@ footer{
     display: grid;
     place-content: center;
   }
-  li:nth-child(4){
+  li:nth-child(4) {
     font-size: 12px;
     color: #707076;
-    line-height: 18px
+    line-height: 18px;
+    cursor: pointer;
   }
-  >div{
+  > div {
     color: #707076;
     font-family: ExtSemiBold;
     font-size: 11px;
     text-transform: uppercase;
     text-decoration: underline;
+    cursor: pointer;
   }
 }
