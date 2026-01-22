@@ -46,7 +46,7 @@
   }
 }
 
-main{
+main {
   min-height: 81vh;
 }
 
@@ -137,6 +137,7 @@ header {
   }
 
   .header-profile-item:nth-child(5) {
+    width: 4vh;
     display: grid;
     place-content: center;
     /* background-image: url(../images/userpfp.svg); */
@@ -778,4 +779,9 @@ footer {
     text-decoration: underline;
     cursor: pointer;
   }
+}
+
+h1 {
+  font-family: ExpBlack;
+  font-size: 31px;
 }

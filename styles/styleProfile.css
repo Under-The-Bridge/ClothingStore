@@ -1,0 +1,20 @@
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+  width: 72%;
+}
+
+#path {
+  height: 50px;
+  font-size: 13px;
+  font-family: ExtRegular;
+  color: #8c8f96;
+  display: flex;
+  align-items: center;
+  span {
+    color: #121214;
+  }
+}

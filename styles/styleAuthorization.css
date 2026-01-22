@@ -1,31 +1,107 @@
-main{
+main {
   display: flex;
   justify-content: center;
 }
 
-#container{
+#container {
   width: 72%;
 }
 
-#path{
+#path {
+  height: 50px;
   font-size: 13px;
   font-family: ExtRegular;
-  color: #8C8F96;
-  span{
+  color: #8c8f96;
+  display: flex;
+  align-items: center;
+  span {
     color: #121214;
   }
 }
 
-#forms-elem{
-  h1{
+#forms-elem {
+  height: 82.5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  h1 {
+    height: 85px;
     font-family: ExpBlack;
     font-size: 31px;
   }
-  #forms{
+  #forms {
     display: flex;
     justify-content: space-between;
   }
-  form{
-    border-radius: 1px;
+  form {
+    width: 35vw;
+    height: 51vh;
+    border-radius: 5px;
+    border: 1px solid #e9eaee;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    input[type="email"],
+    input[type="password"] {
+      height: 71px;
+      border: none;
+      background-color: #f9f9f9;
+    }
+    input[type="checkbox"] {
+      width: 28px;
+      height: 28px;
+      background-color: #f9f9f9;
+      border: none;
+      color: #121214;
+    }
+    input[type="checkbox"]:checked{
+      background-color: #121214;
+    }
+    h3 {
+      font-family: ExtBold;
+      font-size: 23px;
+    }
+    .input-group {
+      font-family: ExtSemiBold;
+      font-size: 13px;
+    }
+    .form-check {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      label{
+        color: #121214;
+      }
+    }
+    #checkbox {
+      font-family: ExtRegular;
+      font-size: 14px;
+    }
+  }
+  #checkbox {
+    height: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .submitDiv {
+    display: flex;
+    justify-content: center;
+    #regist {
+      padding-left: 8.5%;
+      padding-right: 8.5%;
+    }
+  }
+  .submitButton {
+    height: 66px;
+    background-color: #121214;
+    color: white;
+    padding-left: 12.5%;
+    padding-right: 12.5%;
+    font-family: ExpUltrabold;
+    text-transform: uppercase;
+    font-size: 12px;
   }
 }
