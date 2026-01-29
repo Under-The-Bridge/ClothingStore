@@ -110,8 +110,8 @@ header {
 #header-profile-items {
   width: 17.5%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 35px;
 
   .header-profile-item {
     width: 1.75vh;
