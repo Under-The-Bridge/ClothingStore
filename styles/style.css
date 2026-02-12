@@ -120,31 +120,31 @@ header {
     cursor: pointer;
   }
 
-  .header-profile-item:nth-child(1) {
-    background-image: url(../images/lupa.svg);
-  }
+}
+.header-profile-item:nth-child(1) {
+  background-image: url(../images/lupa.svg);
+}
 
-  .header-profile-item:nth-child(2) {
-    background-image: url(../images/star.svg);
-  }
+.header-profile-item:nth-child(2) {
+  background-image: url(../images/star.svg);
+}
 
-  .header-profile-item:nth-child(3) {
-    background-image: url(../images/user.svg);
-  }
+.header-profile-item:nth-child(3) {
+  background-image: url(../images/user.svg);
+}
 
-  .header-profile-item:nth-child(4) {
-    background-image: url(../images/korzina.svg);
-  }
+.header-profile-item:nth-child(4) {
+  background-image: url(../images/korzina.svg);
+}
 
-  .header-profile-item:nth-child(5) {
-    width: 4vh;
-    display: grid;
-    place-content: center;
-    /* background-image: url(../images/userpfp.svg); */
-    a {
-      color: white;
-      text-decoration: none;
-    }
+.header-profile-item:nth-child(5) {
+  width: 4vh;
+  display: grid;
+  place-content: center;
+  /* background-image: url(../images/userpfp.svg); */
+  a {
+    color: white;
+    text-decoration: none;
   }
 }
 
