@@ -1,3 +1,11 @@
+<?php
+require "../connect-db.php";
+
+$user = $_COOKIE["saveLogin"] ?? false;
+$getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
+$sql = "select * from Basket where id_user = $getUser";
+$basket = mysqli_fetch_all(mysqli_query($conn,$sql));
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +22,16 @@
     <main>
         <div id="container">
             <p id="path">Главная / <span>Корзина</span></p>
+            <?php foreach($basket as $item):?>
             <div class="item">
                 <div><img src="../images/shoes/Air Force 1 Ultra Flyknit.svg" alt=""></div>
                 <div class="item-desc">
                     <h1>NIKE NIKE</h1>
-                    <p>asdasd</p>
-                    <p>asdasd</p>
+                    <p></p>
+                    <p></p>
                 </div>
             </div>
+            <?php endforeach?>
         </div>
     </main>
     <?php include "../components/footer.php"?>
