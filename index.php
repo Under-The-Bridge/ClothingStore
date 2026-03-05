@@ -99,8 +99,8 @@
             <div id="header-profile-items">
                 <div class="header-profile-item"></div>
                 <div class="header-profile-item"></div>
-                <a class="header-profile-item" href="pages/authorization.html"></a>
-                <div class="header-profile-item"></div>
+                <a class="header-profile-item" href="pages/authorization.php"></a>
+                <a class="header-profile-item" href="pages/catalog.php"></a>
             </div>
         </div>
     </header>

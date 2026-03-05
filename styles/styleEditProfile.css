@@ -14,12 +14,10 @@ main {
   color: #8c8f96;
   display: flex;
   align-items: center;
-
   span {
     color: #121214;
   }
 }
-
 .KabinetBtn.selected {
   border-left: 2px solid #49D0FF;
   box-sizing: border-box;
@@ -30,13 +28,11 @@ main {
   font-size: 15px;
   font-family: ExtSemibold;
 
-  h1 {
-    text-transform: uppercase;
-  }
-
   #profile {
     display: flex;
   }
+
+  h1{text-transform: uppercase;}
 
   .KabinetBtn {
 
@@ -52,11 +48,6 @@ main {
       width: 19px;
       height: 19px;
     }
-
-    * {
-      color: black;
-      text-decoration: none;
-    }
   }
 
   #Kabinet {
@@ -69,84 +60,27 @@ main {
     flex-direction: column;
     gap: 20px;
   }
-
-  #data {
+  #data{
     border-radius: 10px;
     padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-
-    .input-group {
+    >div{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+    .input-group{
       width: 433px;
     }
-
-    .form-floating>* {
+    .form-floating>*{
       font-family: ExtSemiBold;
       font-size: 13px;
     }
   }
-
-  >div>h4:last-child {
+  >div>h4:last-child{
     color: gray;
   }
-
-  input {
+  input{
     background-color: #F9F9F9;
     border: none;
-  }
-}
-
-#profileNavigation {
-  width: 1011px;
-  height: 296px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  justify-content: space-between;
-  text-decoration: none;
-}
-
-.nav-btn {
-  width: 317px;
-  height: 133px;
-  border-radius: 5px;
-  border: 1px #F6F6F6 solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: black;
-  text-decoration: none;
-
-  * {
-    color: black;
-    text-decoration: none;
-
-  }
-
-  img {
-    height: 30px;
-  }
-}
-
-#orderHistory {
-  height: 420px;
-  border: 1px solid #E9EAEE;
-  border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  padding: 35px;
-
-  #table {
-    overflow-y: scroll;
-  }
-
-  table {
-    width: 100%;
-  }
-
-  td {
-    height: 66px;
-    border-bottom: 1px solid #EBEBEB;
   }
 }

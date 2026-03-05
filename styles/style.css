@@ -38,7 +38,7 @@
 }
 
 * {
-  margin: 0;
+  margin: 0 !important;
   padding: 0;
   user-select: none;
   p {
@@ -49,6 +49,11 @@
 main {
   min-height: 81vh;
 }
+
+#container{
+  width: 72%;
+}
+
 
 h2 {
   font-family: ExpBlack;
@@ -107,6 +112,8 @@ header {
   }
 }
 
+
+
 #header-profile-items {
   width: 17.5%;
   display: flex;
@@ -153,6 +160,18 @@ header {
     flex-direction: column;
     gap:10px;
 } */
+
+#path {
+  height: 50px;
+  font-size: 13px;
+  font-family: ExtRegular;
+  color: #8c8f96;
+  display: flex;
+  align-items: center;
+  span {
+    color: #121214;
+  }
+}
 
 #panel {
   height: 77vh;
@@ -782,10 +801,27 @@ footer {
 }
 
 h1 {
+  height: 45px;
   font-family: ExpBlack;
   font-size: 31px;
 }
 h4 {
+  height: 45px;
   font-family: ExtBold;
   font-size: 23px;
+}
+
+.btn-black {
+    display: flex;
+    align-items: center;
+    width: 268px;
+    height: 66px;
+    border-radius: 5px;
+    background-color: #121214;
+    color: white;
+    font-family: ExpUltraBold;
+    font-size: 12px;
+    text-transform: uppercase;
+    justify-content: space-evenly;
+    cursor: pointer;
 }

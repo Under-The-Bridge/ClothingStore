@@ -1,3 +1,23 @@
+<?php
+    require "../connect-db.php";
+    if(isset($_COOKIE['saveLogin'])){
+        $loginUser = $_COOKIE['saveLogin'];
+        $queryUser = mysqli_query($conn, "Select * from Users where email = '$loginUser'");
+        if(mysqli_num_rows($queryUser)>0){
+            $user = mysqli_fetch_assoc($queryUser);
+        }else{
+            echo "<script>
+            alert(\"Нет такого пользователя\");
+            location.href='authorization.php';
+            </script>";
+        }
+    }else{
+        echo "<script>
+        alert(\"Войдите в профиль\");
+        location.href='authorization.php';
+        </script>";
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,14 +27,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/styleAuthorization.css">
+    <link rel="stylesheet" href="../styles/styleProfile.css">
     <title>Document</title>
 </head>
 
 <body>
     <header>
         <div id="header-items">
-            <a id="header-logo" href="../index.html"></a>
+            <a id="header-logo" href="../index.php"></a>
             <div id="header-btns">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -100,73 +120,123 @@
             <div id="header-profile-items">
                 <div class="header-profile-item"></div>
                 <div class="header-profile-item"></div>
-                <a class="header-profile-item" href="authorization.html"></a>
-                <div class="header-profile-item"></div>
+                <a class="header-profile-item" href="authorization.php"></a>
+                <a class="header-profile-item" href="catalog.php"></a>
             </div>
         </div>
     </header>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Личный кабинет</span></p>
-            <div id="forms-elem">
-                <h1>АККАУНТ</h1>
-                <div id="forms">
-                    <form action="myprofile.html">
-                        <h3>Войти</h3>
-                        <div class="input-group has-validation">
-                            <div class="form-floating is-invalid">
-                                <input type="email" class="form-control" id="floatingInputGroup2" placeholder="Username"
-                                    required>
-                                <label for="floatingInputGroup2">Email адрес:</label>
+            <div id="profilePanel">
+                <h1>Личный кабинет</h1>
+                <div id="profile">
+                    <div id="Kabinet">
+                        <a class="KabinetBtn selected" href="myprofile.php">
+                            <img src="../images/profileLogo.svg" alt="">
+                            <p>Мой аккаунт</p>
+                        </a>
+                        <a class="KabinetBtn" href="editprofile.php">
+                            <img src="../images/profileSettings.svg" alt="">
+                            <p>Редактировать профиль</p>
+                        </a>
+                        <div class="KabinetBtn">
+                            <img src="../images/linesLogo.svg" alt="">
+                            <p>История заказов</p>
+                        </div>
+                        <div class="KabinetBtn">
+                            <img src="../images/lineDotsLogo.svg" alt="">
+                            <p>Мои заказы</p>
+                        </div>
+                        <div class="KabinetBtn">
+                            <img src="../images/pointerLogo.svg" alt="">
+                            <p>Адреса</p>
+                        </div>
+                        <div class="KabinetBtn">
+                            <img src="../images/adressLogo.svg" alt="">
+                            <p>Редактировать адреса</p>
+                        </div>
+                        <div class="KabinetBtn">
+                            <img src="../images/lockLogo.svg" alt="">
+                            <p>Пароль</p>
+                        </div>
+                        <div class="KabinetBtn">
+                            <img src="../images/exitLogo.svg" alt="">
+                            <p>Выход</p>
+                        </div>
+                    </div>
+                    <div id="data">
+                        <h4>Приведствуем, NAME</h4>
+                        <div id="profileNavigation">
+                            <a class="nav-btn" href="profile.php">
+                                <img src="../images/profileLogo.svg" alt="">
+                                <p>Мой профиль</p>
+                            </a>
+                            <div class="nav-btn">
+                                <img src="../images/lineDotsLogo.svg" alt="">
+                                <p>Заказы</p>
+                            </div>
+                            <div class="nav-btn">
+                                <img src="../images/pointerLogo.svg" alt="">
+                                <p>Мои адреса</p>
+                            </div>
+                            <div class="nav-btn">
+                                <img src="../images/profileSettings.svg" alt="">
+                                <p>Редактировать профиль</p>
+                            </div>
+                            <div class="nav-btn">
+                                <img src="../images/star.svg" alt="">
+                                <p>Избранные товары</p>
+                            </div>
+                            <div class="nav-btn">
+                                <img src="../images/exitLogo.svg" alt="">
+                                <p>Выход</p>
                             </div>
                         </div>
-                        <div class="input-group has-validation">
-                            <div class="form-floating is-invalid">
-                                <input type="password" class="form-control" id="floatingInputGroup2"
-                                    placeholder="Username" required>
-                                <label for="floatingInputGroup2">Пароль:</label>
+                        <div id="orderHistory">
+                            <h4>Текущие заказы</h4>
+                            <div id="table">
+                                <table>
+                                    <tr>
+                                        <td>НОМЕР</td>
+                                        <td>ДАТА</td>
+                                        <td>СТАТУС</td>
+                                        <td>ИТОГ</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1234</td>
+                                        <td>17/02/2026</td>
+                                        <td>В обработке</td>
+                                        <td>6 769p</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1234</td>
+                                        <td>17/02/2026</td>
+                                        <td>В обработке</td>
+                                        <td>6 769p</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1234</td>
+                                        <td>17/02/2026</td>
+                                        <td>В обработке</td>
+                                        <td>6 769p</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1234</td>
+                                        <td>17/02/2026</td>
+                                        <td>В обработке</td>
+                                        <td>6 769p</td>
+                                    </tr>
+                                    <tr>
+                                        <td>#1234</td>
+                                        <td>17/02/2026</td>
+                                        <td>В обработке</td>
+                                        <td>6 769p</td>
+                                    </tr>
+                                </table>
                             </div>
                         </div>
-                        <div id="checkbox">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                                <label class="form-check-label" for="checkDefault">
-                                    Запомнить меня
-                                </label>
-                            </div>
-                            <a class="link-secondary" href="" onclick="alert('вспомни')">Забыли пароль?</a>
-                        </div>
-                        <div class="submitDiv">
-                            <input type="submit" value="Войти" class="submitButton btn">
-                        </div>
-                    </form>
-                    <form action="myprofile.html">
-                        <h3>Регистрация</h3>
-                        <div class="input-group has-validation">
-                            <div class="form-floating is-invalid">
-                                <input type="email" class="form-control" id="floatingInputGroup2" placeholder="Username"
-                                    required>
-                                <label for="floatingInputGroup2">Email адрес:</label>
-                            </div>
-                        </div>
-                        <div class="input-group has-validation">
-                            <div class="form-floating is-invalid">
-                                <input type="password" class="form-control" id="floatingInputGroup2"
-                                    placeholder="Username" required>
-                                <label for="floatingInputGroup2">Пароль:</label>
-                            </div>
-                        </div>
-                        <div class="input-group has-validation">
-                            <div class="form-floating is-invalid">
-                                <input type="password" class="form-control" id="floatingInputGroup2"
-                                    placeholder="Username" required>
-                                <label for="floatingInputGroup2">Повторите пароль:</label>
-                            </div>
-                        </div>
-                        <div class="submitDiv">
-                            <input id="regist" type="submit" value="Зарегистрироваться" class="submitButton btn">
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

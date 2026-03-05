@@ -7,14 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="../styles/style.css">
-    <link rel="stylesheet" href="../styles/styleProfile.css">
+    <link rel="stylesheet" href="../styles/styleAuthorization.css">
     <title>Document</title>
 </head>
 
 <body>
     <header>
         <div id="header-items">
-            <a id="header-logo" href="../index.html"></a>
+            <a id="header-logo" href="../index.php"></a>
             <div id="header-btns">
                 <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
@@ -100,84 +100,73 @@
             <div id="header-profile-items">
                 <div class="header-profile-item"></div>
                 <div class="header-profile-item"></div>
-                <a class="header-profile-item" href="authorization.html"></a>
-                <div class="header-profile-item"></div>
+                <a class="header-profile-item" href="authorization.php"></a>
+                <a class="header-profile-item" href="catalog.php"></a>
             </div>
         </div>
     </header>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Личный кабинет</span></p>
-            <div id="profilePanel">
-                <h1>Личный кабинет</h1>
-                <div id="profile">
-                    <div id="Kabinet">
-                        <div class="KabinetBtn">
-                            <img src="../images/profileLogo.svg" alt="">
-                            <p>Мой аккаунт</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/profileLogo.svg" alt="">
-                            <p>Редактировать профиль</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/linesLogo.svg" alt="">
-                            <p>История заказов</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/lineDotsLogo.svg" alt="">
-                            <p>Мои заказы</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/pointerLogo.svg" alt="">
-                            <p>Адреса</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/adressLogo.svg" alt="">
-                            <p>Редактировать адреса</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/lockLogo.svg" alt="">
-                            <p>Пароль</p>
-                        </div>
-                        <div class="KabinetBtn">
-                            <img src="../images/exitLogo.svg" alt="">
-                            <p>Выход</p>
-                        </div>
-                    </div>
-                    <div id="data">
-                        <h4>Данные</h4>
-                        <div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Username"
-                                        value="Имя" disabled>
-                                    <label for="floatingInputGroup2">Ваше имя:</label>
-                                </div>
-                            </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input type="text" class="form-control" id="floatingInputGroup2" placeholder="Username"
-                                        value="Фамилия" disabled>
-                                    <label for="floatingInputGroup2">Фамилия:</label>
-                                </div>
-                            </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input type="email" class="form-control" id="floatingInputGroup2" placeholder="Username"
-                                        value="temp@temp.com" disabled>
-                                    <label for="floatingInputGroup2">Email адрес:</label>
-                                </div>
-                            </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input type="tel" class="form-control" id="floatingInputGroup2" placeholder="Username"
-                                        value="89876543210" disabled>
-                                    <label for="floatingInputGroup2">Номер телефона:</label>
-                                </div>
+            <div id="forms-elem">
+                <h1>АККАУНТ</h1>
+                <div id="forms">
+                    <form action="../authReg-db.php" method="POST">
+                        <h3>Войти</h3>
+                        <div class="input-group has-validation">
+                            <div class="form-floating is-invalid">
+                                <input name="emailForm" type="email" class="form-control" id="floatingInputGroup2" placeholder="Username"
+                                    required>
+                                <label for="floatingInputGroup2">Email адрес:</label>
                             </div>
                         </div>
-                    </div>
+                        <div class="input-group has-validation">
+                            <div class="form-floating is-invalid">
+                                <input name="passwordForm" type="password" class="form-control" id="floatingInputGroup2"
+                                    placeholder="Username" required>
+                                <label for="floatingInputGroup2">Пароль:</label>
+                            </div>
+                        </div>
+                        <div id="checkbox">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="checkDefault">
+                                <label class="form-check-label" for="checkDefault">
+                                    Запомнить меня
+                                </label>
+                            </div>
+                            <a class="link-secondary" href="" onclick="alert('вспомни')">Забыли пароль?</a>
+                        </div>
+                        <div class="submitDiv">
+                            <button name="btnAuth" type="submit" class="submitButton btn">Войти</button>
+                        </div>
+                    </form>
+                    <form action="../authReg-db.php" method="POST">
+                        <h3>Регистрация</h3>
+                        <div class="input-group has-validation">
+                            <div class="form-floating is-invalid">
+                                <input name="emailForm" type="email" class="form-control" id="floatingInputGroup2" placeholder="Username"
+                                    required>
+                                <label for="floatingInputGroup2">Email адрес:</label>
+                            </div>
+                        </div>
+                        <div class="input-group has-validation">
+                            <div class="form-floating is-invalid">
+                                <input name="passwordForm" type="password" class="form-control" id="floatingInputGroup2"
+                                    placeholder="Username" required>
+                                <label for="floatingInputGroup2">Пароль:</label>
+                            </div>
+                        </div>
+                        <div class="input-group has-validation">
+                            <div class="form-floating is-invalid">
+                                <input name="passwordCheckForm" type="password" class="form-control" id="floatingInputGroup2"
+                                    placeholder="Username" required>
+                                <label for="floatingInputGroup2">Повторите пароль:</label>
+                            </div>
+                        </div>
+                        <div class="submitDiv">
+                            <button name="btnReg" id="regist" type="submit" class="submitButton btn">Зарегистрироваться</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
