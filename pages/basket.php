@@ -17,9 +17,9 @@
             <div class="item">
                 <div><img src="../images/shoes/Air Force 1 Ultra Flyknit.svg" alt=""></div>
                 <div class="item-desc">
-                    <p></p>
-                    <p></p>
-                    <p></p>
+                    <h1>NIKE NIKE</h1>
+                    <p>asdasd</p>
+                    <p>asdasd</p>
                 </div>
             </div>
         </div>
