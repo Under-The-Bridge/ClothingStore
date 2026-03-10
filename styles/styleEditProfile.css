@@ -1,0 +1,86 @@
+main {
+  display: flex;
+  justify-content: center;
+}
+
+#container {
+  width: 72%;
+}
+
+#path {
+  height: 50px;
+  font-size: 13px;
+  font-family: ExtRegular;
+  color: #8c8f96;
+  display: flex;
+  align-items: center;
+  span {
+    color: #121214;
+  }
+}
+.KabinetBtn.selected {
+  border-left: 2px solid #49D0FF;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+#profilePanel {
+  font-size: 15px;
+  font-family: ExtSemibold;
+
+  #profile {
+    display: flex;
+  }
+
+  h1{text-transform: uppercase;}
+
+  .KabinetBtn {
+
+    color: black;
+    text-decoration: none;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    img {
+      width: 19px;
+      height: 19px;
+    }
+  }
+
+  #Kabinet {
+    width: 318px;
+    height: 100%;
+    border: 1px solid #E9EAEE;
+    border-radius: 5px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  #data{
+    border-radius: 10px;
+    padding: 25px;
+    >div{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+    .input-group{
+      width: 433px;
+    }
+    .form-floating>*{
+      font-family: ExtSemiBold;
+      font-size: 13px;
+    }
+  }
+  >div>h4:last-child{
+    color: gray;
+  }
+  input{
+    background-color: #F9F9F9;
+    border: none;
+  }
+}
