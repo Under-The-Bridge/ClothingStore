@@ -10,7 +10,7 @@
         $name = $_POST["nameForm"] ?? '';
         $surname = $_POST["surnameForm"] ?? '';
         $patronymic = $_POST["patronymicForm"] ?? '';
-        $email = $_POST["emailForm"] ?? '';
+        $email = $_POST["emailForm"] ?? false;
         $phone = $_POST["phoneForm"] ?? '';
     
         // print_r($_COOKIE["saveLogin"]);
@@ -18,7 +18,7 @@
         
         $query = mysqli_query($conn, $sql);
         if($query){
-            setcookie('saveLogin',$email, time()+3600);
+            if($email)setcookie('saveLogin',$email, time()+3600);
             echo "<script>
             alert(\"Успешно изменено!\");
             location.href='pages/editprofile.php';

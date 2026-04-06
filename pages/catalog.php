@@ -1,17 +1,19 @@
 <?php
 require "../connect-db.php";
 
-
-$user = $_COOKIE["saveLogin"];
-$getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
-
+$user = false;
+if(isset($_COOKIE["saveLogin"])){
+    $user = $_COOKIE["saveLogin"];
+    $id = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
+    $query = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $id"))[0];
+}
+$getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"] ?? false;
 $minprice = $_GET["min-price"] ?? 0;
-$maxprice = $_GET["max-price"] ?? 10000;
+$maxprice = $_GET["max-price"] ?? 100000;
 $category = $_GET["category"] ?? false;
 $sort = $_GET["sort"] ?? 0;
 
-
-$sql = "select * from Item";
+$sql = "select * from Item join Categories on Item.id_category = Categories.id_category";
 
 $sql .= " where price_item between $minprice and $maxprice";
 
@@ -33,12 +35,12 @@ if(isset($_GET["search"])){
         $sql .= " order by price_item $sort";
     }
 }
-$query = mysqli_query($conn, $sql);
+$q = mysqli_query($conn, $sql);
 
 $categories = mysqli_fetch_all(mysqli_query($conn, "Select * from Categories"),MYSQLI_ASSOC);
 
 
-$Items = mysqli_fetch_all($query,MYSQLI_ASSOC);
+$Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
 
 ?>
 
@@ -58,26 +60,11 @@ $Items = mysqli_fetch_all($query,MYSQLI_ASSOC);
 </head>
 
 <body>
-    <header>
-        <div id="header-items">
-            <a id="header-logo" href="#"></a>
-            <div id="header-div">
-                <form id="header-btns">
-                    <input id="SearchInput" type="text" placeholder="Поиск по каталогу товаров" name="search-value">
-                    <button id="SearchLogo" class="header-profile-item btn" name="search"></button>
-                </form>
-                <div id="header-profile-items">
-                    <div class="header-profile-item" hidden></div>
-                    <div class="header-profile-item"></div>
-                    <a class="header-profile-item" href="authorization.php"></a>
-                    <a class="header-profile-item" href="catalog.php"></a>
-                </div>
-            </div>
-        </div>
-    </header>
+<?php include "../components/header2.php" ?>
+
     <main>
         <div id="container">
-            <p id="path">Главная / Личный кабинет/<span>Каталог</span></p>
+            <p id="path">Главная / <span>Каталог</span></p>
             <div id="catalog">
                 <form id="filterPanel">
                     <div class="filter">
@@ -419,23 +406,19 @@ $Items = mysqli_fetch_all($query,MYSQLI_ASSOC);
                 </form>
                 <div id="catalogItems">
                     <h1>Каталог</h1>
-                    <p><?=mysqli_num_rows($query)?> товаров</p>
+                    <p><?=mysqli_num_rows($q)?> товаров</p>
                     <div id="items">
                         <?php foreach($Items as $Item):?>
                         <div class="item-card">
                             <a href="product.php?item=<?=$Item["id_item"]?>" class="item-card">
                                 <p class="star">☆</p>
-                                <img src="../images/shoes/<?=$Item["img_item"]?>.svg" alt="<?=$Item["name_item"]?>">
+                                <img src="../images/<?=$Item["name_category"]?>/<?=$Item["img_item"]?>" alt="<?=$Item["name_item"]?>">
                                 <div class="item-card-text">
                                     <p><?=$Item["name_item"]?></p>
                                     <p>от <?=$Item["price_item"]?> ₽</p>
                                 </div>
                             </a>
-                            <?php if(mysqli_num_rows(mysqli_query($conn,"select * from `Basket` where `id_user` = $getUser and `id_item` = ".$Item["id_item"])) == 0):?>
                                 <a href="../basket-db.php?item=<?=$Item["id_item"]?>&addbskt=1" class="btn btn-primary">Добавить в корзину</a>
-                            <?php else:?>
-                                <a href="basket.php" class="btn btn-primary">Перейти в корзину</a>
-                            <?php endif;?>
                         </div>
                         <?php endforeach;?>
                     </div>

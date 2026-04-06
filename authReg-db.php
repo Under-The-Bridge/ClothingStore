@@ -3,6 +3,8 @@
     require "connect-db.php";
 
     print_r($_POST);
+
+
     if(isset($_POST['btnAuth'])){
         $emailUser = trim($_POST['emailForm']);
         $passwordUser = trim($_POST['passwordForm']);
@@ -53,7 +55,7 @@
         $emailUser = trim($_POST['emailForm']);
         $passwordUser = trim($_POST['passwordForm']);
         // Проверка на уникальность почты/логина
-        $queryUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `email`='$emailUser' AND `password_user`='$passwordUser'");
+        $queryUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `email`='$emailUser'");
         if(mysqli_num_rows($queryUser)>0){
             echo "<script>
             alert(\"Пользователь с такой почтой/логином уже существует!\");

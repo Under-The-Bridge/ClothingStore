@@ -3,6 +3,9 @@
 }
 
 #SearchLogo {
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    background-size: 75%;
     background-image: url(../images/lupa.svg);
 }
 
@@ -72,6 +75,11 @@ main {
     min-height: 81vh;
     display: flex;
     justify-content: center;
+}
+
+a{
+    color: black;
+    text-decoration: none;
 }
 
 #container {
@@ -188,6 +196,20 @@ header {
     height: 1.75vh;
     background-size: cover;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+.count{
+  position: absolute;
+  width: 25px;
+  transform: translateX(25px);
+  background-color: #49d0ff;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
 }
 
 .header-profile-item:nth-child(5) {

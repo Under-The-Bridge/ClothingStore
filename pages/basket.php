@@ -2,8 +2,15 @@
 require "../connect-db.php";
 
 $user = $_COOKIE["saveLogin"] ?? false;
+
+if(!$user){
+        echo "<script>
+    alert(\"Войдите в профиль\");
+    location.href='authorization.php';
+    </script>";
+}
 $getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
-$sql = "select * from Basket join Item on Basket.id_item = Item.id_item  where  id_user = $getUser";
+$sql = "select * from Basket join Item on Basket.id_item = Item.id_item join Categories on Categories.id_category = Item.id_category  where  id_user = $getUser";
 $result = mysqli_query($conn, $sql);
 $countquery = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $getUser"))[0];
 $sum = 0;
@@ -23,7 +30,7 @@ $basket = mysqli_fetch_all($result, MYSQLI_ASSOC);
 </head>
 
 <body>
-    <?php include "../components/header.php" ?>
+    <?php include "../components/header1.php" ?>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Корзина</span></p>
@@ -33,7 +40,7 @@ $basket = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         $sum += $item["price_item"] * $item["item_count"];
                         ?>
                         <div class="item">
-                            <a href="product.php?item=<?=$item["id_item"]?>""><img src="../images/shoes/<?=$item["img_item"]?>.svg" alt=""></a>
+                            <a href="product.php?item=<?=$item["id_item"]?>"><img src="../images/<?=$item["name_category"]?>/<?=$item["img_item"]?>" alt=""></a>
                             <div class="item-desc">
                                 <div class="item-name">
                                     <h2><?=$item["name_item"]?></h2>

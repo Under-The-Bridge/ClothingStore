@@ -118,15 +118,31 @@ header {
   width: 17.5%;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 35px;
-
+  
   .header-profile-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 1.75vh;
     height: 1.75vh;
     background-size: cover;
     cursor: pointer;
   }
 
+  
+}
+.count{
+  position: absolute;
+  width: 25px;
+  transform: translateX(25px);
+  background-color: #49d0ff;
+  color: white !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
 }
 .header-profile-item:nth-child(1) {
   background-image: url(../images/lupa.svg);

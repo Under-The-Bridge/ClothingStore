@@ -27,15 +27,20 @@ main {
 .content {
     display: flex;
     justify-content: space-between;
-    border: 1px red solid !important;
+    /* border: 1px red solid !important;
 
     * {
         border: 1px red solid !important;
-    }
+    } */
 }
 
 .order_info {
     width: 350px;
+}
+
+.item{
+    background-color: rgba(139, 139, 139, 0.05);
+    border-radius: 15px;
 }
 
 .item-desc{

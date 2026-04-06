@@ -3,7 +3,12 @@ require "connect-db.php";
 
 $item = $_GET["item"] ?? false;
 $user = $_COOKIE["saveLogin"] ?? false;
-
+    if(!$user){
+            echo "<script>
+        alert(\"Войдите в профиль\");
+        location.href='pages/authorization.php';
+        </script>";
+    }
 if (isset($user)) {
     $getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
     if (isset($_GET["addbskt"])) {
