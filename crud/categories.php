@@ -49,7 +49,7 @@
                     <label for="name" class="form-label">Название категории</label>
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button name="btnAdd" type="submit" class="btn btn-primary">Добавить</button>
             </form>
         </div>
     </div>

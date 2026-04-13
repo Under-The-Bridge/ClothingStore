@@ -50,6 +50,7 @@
             <td>Описание</td>
             <td>Статус</td>
             <td>Категория</td>
+            <td>Редактировать</td>
         </tr>
         <?foreach($items as $item):?>
         <tr>
@@ -60,6 +61,7 @@
             <td><?=$item["description_item"]?></td>
             <td><?=$item["status_item"]?></td>
             <td><?=$item["name_category"]?></td>
+            <td><a href="items-edit.php?id=<?=$item["id_item"]?>">Редактировать</a></td>
         </tr>
         <?endforeach;?>
     </table>
@@ -84,12 +86,12 @@
                     <div class="mb-3">
             <label class="form-label" for="category">Категория</label>
             <select class="form-control" id="category" name="category" type="text" require>
-        </div>
                 <?foreach($categories as $category):?>
                     <option value="<?=$category["id_category"]?>"><?=$category["name_category"]?></option>
-                <?endforeach;?>
-            </select>
-            <button>Добавить</button>
+                    <?endforeach;?>
+                </select>
+            </div>
+                <button name="btnAdd" type="submit" class="btn btn-primary">Добавить</button>
         </form>
     </div>
 </body>

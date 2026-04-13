@@ -20,12 +20,13 @@ $query = mysqli_fetch_array(mysqli_query($conn,"select * from Categories where `
 <body>
     <div id="addPanel">
         <form method="post" action="categories-db.php">
+            <input type="hidden" class="form-control" id="name" name="id" value="<?=$query[0]?>">
             <div class="mb-3">
                 <label for="name" class="form-label">Название категории</label>
                 <input type="text" class="form-control" id="name" name="name" value="<?=$query[1]?>">
             </div>
-            <button type="submit" class="btn btn-primary">Сохранить</button>
-            <a href="delete-db.php?id=<?=$id?>" type="submit" class="btn btn-danger">Удалить</a>
+            <button name="btnEdit" type="submit" class="btn btn-primary">Сохранить</button>
+            <a href="delete-db.php?id=<?=$id?>&table=Categories&idField=id_category" type="submit" class="btn btn-danger">Удалить</a>
         </form>
     </div>
 </body>

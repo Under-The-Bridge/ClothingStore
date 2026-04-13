@@ -37,6 +37,7 @@
                 <td>Имя</td>
                 <td>Фамилия</td>
                 <td>Отчество</td>
+                <td>Редактировать</td>
             </tr>
             <?foreach($items as $item):?>
             <tr>
@@ -48,6 +49,7 @@
                 <td><?=$item["name"]?></td>
                 <td><?=$item["surname"]?></td>
                 <td><?=$item["patronymic"]?></td>
+                <td><a href="users-edit.php?id=<?=$item["id_user"]?>">Редактировать</a></td>
             </tr>
             <?endforeach;?>
         </table>
@@ -84,7 +86,7 @@
                 <label class="form-label" for="pat">Отчество</label>
                 <input class="form-control" id="pat" name="pat" type="pat" required>
             </div>
-            <button>Добавить</button>
+                <button name="btnAdd" type="submit" class="btn btn-primary">Добавить</button>
         </form>
         </div>
     </div>

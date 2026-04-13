@@ -18,5 +18,6 @@ if(mysqli_num_rows(mysqli_query($conn,"SELECT * FROM `Users` WHERE `email` = '$e
     
     $query = mysqli_query($conn, $sql);
 }
+header("Location: /crud/users.php");
 
 ?>
