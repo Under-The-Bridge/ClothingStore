@@ -1,4 +1,5 @@
 <?php
+session_start();
     // Авторизация
     require "connect-db.php";
 
@@ -15,13 +16,7 @@
             //    print_r($user);
             //    var_dump($user);
            if($user['status_user']=='Активен'){
-                // Сессия
-                // session_start();
-                // $_SESSION['saveLogin']=$user['LoginUser']; - сохранение значения под ключом
-                // session_destroy(); - уничтожение всей сессии
-                // unset($_SESSION['saveLogin']); - удаление из сессии значение под ключом
-                // Печеньки
-                setcookie('saveLogin', $user['email'], time()+3600);
+                $_SESSION['id']=$user['id_user'];
                 // setcookie(ключ/имя, значение, время хранения)
                 echo "<script>
                 alert(\"Добро пожаловать!\");

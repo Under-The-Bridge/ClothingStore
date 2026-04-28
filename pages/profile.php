@@ -1,8 +1,9 @@
 <?php
     require "../connect-db.php";
-    if(isset($_COOKIE['saveLogin'])){
-        $loginUser = $_COOKIE['saveLogin'];
-        $queryUser = mysqli_query($conn, "Select * from Users where email = '$loginUser'");
+    session_start();
+    if(isset($_SESSION['id'])){
+        $user = $_SESSION['id'];
+        $queryUser = mysqli_query($conn, "Select * from Users where email = '$user'");
         if(mysqli_num_rows($queryUser)>0){
             $user = mysqli_fetch_assoc($queryUser);
         }else{

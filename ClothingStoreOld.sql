@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Апр 28 2026 г., 21:53
+-- Время создания: Мар 10 2026 г., 19:34
 -- Версия сервера: 8.0.30
 -- Версия PHP: 8.1.9
 
@@ -51,9 +51,8 @@ CREATE TABLE `Basket` (
 --
 
 INSERT INTO `Basket` (`id_basket`, `id_item`, `id_user`, `item_count`) VALUES
-(1, 1, 17, 5),
-(3, 2, 17, 4),
-(8, 2, 20, 2);
+(1, 1, 17, 4),
+(3, 2, 17, 3);
 
 -- --------------------------------------------------------
 
@@ -106,22 +105,10 @@ INSERT INTO `Item` (`id_item`, `name_item`, `price_item`, `img_item`, `descripti
 CREATE TABLE `Orders` (
   `id_order` int NOT NULL,
   `id_user` int DEFAULT NULL,
+  `id_item` int DEFAULT NULL,
   `price` int DEFAULT NULL,
   `data_order` date DEFAULT NULL,
   `arrival_data` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `Order_Item`
---
-
-CREATE TABLE `Order_Item` (
-  `id_Order_Item` int NOT NULL,
-  `id_item` int NOT NULL,
-  `id_order` int NOT NULL,
-  `count` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -147,9 +134,7 @@ CREATE TABLE `Users` (
 
 INSERT INTO `Users` (`id_user`, `password_user`, `email`, `phone`, `status_user`, `name`, `surname`, `patronymic`) VALUES
 (17, '123', 'ramz@ramz', '8979878', 'Активен', 'Рамз', 'Рамз', 'Рамз'),
-(18, 'ramz@ramz', 'ramz@ramz', NULL, 'Активен', NULL, NULL, NULL),
-(19, 'ramazanikbaev6@gmail.com', 'ramazanikbaev67@gmail.com', '', 'Активен', '', '', ''),
-(20, 'ramazanikbaev6@gmail.com', 'ramazanikbaev6@gmail.com', 'asd', 'Активен', '', '', 'qwe');
+(18, 'ramz@ramz', 'ramz@ramz', NULL, 'Активен', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -200,13 +185,8 @@ ALTER TABLE `Item`
 --
 ALTER TABLE `Orders`
   ADD PRIMARY KEY (`id_order`),
-  ADD KEY `orders_ibfk_1` (`id_user`);
-
---
--- Индексы таблицы `Order_Item`
---
-ALTER TABLE `Order_Item`
-  ADD PRIMARY KEY (`id_Order_Item`);
+  ADD KEY `orders_ibfk_1` (`id_user`),
+  ADD KEY `orders_ibfk_2` (`id_item`);
 
 --
 -- Индексы таблицы `Users`
@@ -236,7 +216,7 @@ ALTER TABLE `Addresses`
 -- AUTO_INCREMENT для таблицы `Basket`
 --
 ALTER TABLE `Basket`
-  MODIFY `id_basket` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_basket` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `Categories`
@@ -257,16 +237,10 @@ ALTER TABLE `Orders`
   MODIFY `id_order` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `Order_Item`
---
-ALTER TABLE `Order_Item`
-  MODIFY `id_Order_Item` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `User_favorites`
@@ -301,7 +275,8 @@ ALTER TABLE `Item`
 -- Ограничения внешнего ключа таблицы `Orders`
 --
 ALTER TABLE `Orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `Users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `Users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`id_item`) REFERENCES `Item` (`id_item`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Ограничения внешнего ключа таблицы `User_favorites`

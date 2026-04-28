@@ -1,8 +1,9 @@
 <?php
+session_start();
     require "../connect-db.php";
-    if(isset($_COOKIE['saveLogin'])){
-        $loginUser = $_COOKIE['saveLogin'];
-        $queryUser = mysqli_query($conn, "Select * from Users where email = '$loginUser'");
+    if(isset($_SESSION["id"])){
+        $loginUser = $_SESSION["id"];
+        $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$loginUser'");
         if(mysqli_num_rows($queryUser)>0){
             $user = mysqli_fetch_assoc($queryUser);
         }else{
@@ -74,7 +75,7 @@
                         </div>
                     </div>
                     <div id="data">
-                        <h4>Приведствуем, NAME</h4>
+                        <h4>Приведствуем</h4>
                         <div id="profileNavigation">
                             <a class="nav-btn" href="profile.php">
                                 <img src="../images/profileLogo.svg" alt="">

@@ -1,13 +1,12 @@
 <?php
 require "../connect-db.php";
-
+session_start();
 $user = false;
-if(isset($_COOKIE["saveLogin"])){
-    $user = $_COOKIE["saveLogin"];
-    $id = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
-    $query = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $id"))[0];
+if(isset($_SESSION['id'])){
+    $user = $_SESSION['id'];
+    $query = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $user"))[0];
 }
-$getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"] ?? false;
+$getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where id_user = '$user'"))["id_user"] ?? false;
 $minprice = $_GET["min-price"] ?? 0;
 $maxprice = $_GET["max-price"] ?? 100000;
 $category = $_GET["category"] ?? false;

@@ -1,9 +1,10 @@
 <?php
     require "../connect-db.php";
+    session_start();
     $user = null;
-    if(isset($_COOKIE['saveLogin'])){
-        $loginUser = $_COOKIE['saveLogin'];
-        $queryUser = mysqli_query($conn, "Select * from Users where email = '$loginUser'");
+    if(isset($_SESSION['id'])){
+        $user = $_SESSION['id'];
+        $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$user'");
         if(mysqli_num_rows($queryUser)>0){
             $user = mysqli_fetch_array($queryUser);
         }else{

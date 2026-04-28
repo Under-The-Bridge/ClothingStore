@@ -1,19 +1,19 @@
 <?php
 require "../connect-db.php";
+session_start();
+$user = $_SESSION['id'] ?? false;
 
-$user = $_COOKIE["saveLogin"] ?? false;
-
-if(!$user){
-        echo "<script>
+if (!$user) {
+    echo "<script>
     alert(\"Войдите в профиль\");
     location.href='authorization.php';
     </script>";
 }
-$getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where email = '$user'"))["id_user"];
-$sql = "select * from Basket join Item on Basket.id_item = Item.id_item join Categories on Categories.id_category = Item.id_category  where  id_user = $getUser";
+$sql = "select * from Basket join Item on Basket.id_item = Item.id_item join Categories on Categories.id_category = Item.id_category  where  id_user = $user";
 $result = mysqli_query($conn, $sql);
-$countquery = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $getUser"))[0];
+$countquery = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $user"))[0];
 $sum = 0;
+$count = mysqli_num_rows(mysqli_query($conn, "select * from Basket where id_user = $user"));
 $basket = mysqli_fetch_all($result, MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
@@ -36,35 +36,48 @@ $basket = mysqli_fetch_all($result, MYSQLI_ASSOC);
             <p id="path">Главная / <span>Корзина</span></p>
             <div class="content">
                 <div class="items">
-                    <?php foreach ($basket as $item): 
-                        $sum += $item["price_item"] * $item["item_count"];
-                        ?>
-                        <div class="item">
-                            <a href="product.php?item=<?=$item["id_item"]?>"><img src="../images/<?=$item["name_category"]?>/<?=$item["img_item"]?>" alt=""></a>
-                            <div class="item-desc">
-                                <div class="item-name">
-                                    <h2><?=$item["name_item"]?></h2>
-                                    <div class="item_count">
-                                        <a href="/basket-db.php?item=<?=$item["id_item"]?>&decr=1" class="btn btn-primary">-</a>
-                                        <span><?=$item["item_count"]?></span>
-                                        <a href="/basket-db.php?item=<?=$item["id_item"]?>&inc=1" class="btn btn-primary">+</a>
+                    <?php if ($count != 0): ?>
+                        <?php foreach ($basket as $item):
+                            $sum += $item["price_item"] * $item["item_count"];
+                            ?>
+                            <div class="item">
+                                <a href="product.php?item=<?= $item["id_item"] ?>"><img
+                                        src="../images/<?= $item["name_category"] ?>/<?= $item["img_item"] ?>" alt=""></a>
+                                <div class="item-desc">
+                                    <div class="item-name">
+                                        <h2><?= $item["name_item"] ?></h2>
+                                        <div class="item_count">
+                                            <a href="/basket-db.php?item=<?= $item["id_item"] ?>&decr=1"
+                                                class="btn btn-primary">-</a>
+                                            <span><?= $item["item_count"] ?></span>
+                                            <a href="/basket-db.php?item=<?= $item["id_item"] ?>&inc=1"
+                                                class="btn btn-primary">+</a>
+                                        </div>
+                                        <h2>
+                                            <?= $item["price_item"] ?>
+                                            ₽
+                                        </h2>
                                     </div>
-                                    <h2>
-                                        <?=$item["price_item"]?>
-                                        ₽
-                                    </h2>
+                                    <p><?= $item["description_item"] ?></p>
+                                    <p></p>
                                 </div>
-                                <p><?=$item["description_item"]?></p>
-                                <p></p>
+                                <div>
+                                    <a href="/basket-db.php?item=<?= $item["id_item"] ?>&del=1">Удалить</a>
+                                </div>
                             </div>
-                        </div>
-                    <?php endforeach ?>
+                        <?php endforeach ?>
+                    <?php else: ?>
+                        <h1>Тут пусто :(</h1>
+                    <?php endif; ?>
                 </div>
                 <div class="order_info">
                     <p>
-                        Товары, <?=$countquery?>шт.
+                        Товары, <?= $countquery ?>шт.
                     </p>
-                    <h4>Итого <?=$sum?>₽</h4>
+                    <h4>Итого <?= $sum ?>₽</h4>
+                    <?php if ($count != 0): ?>
+                        <a class="btn btn-primary" href="order.php">Оформить заказ</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
