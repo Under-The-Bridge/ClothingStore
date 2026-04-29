@@ -30,6 +30,7 @@ main {
 #imagePanel {
     img {
         height: 100%;
+        width: 489px;
     }
 
     >div:first-child {

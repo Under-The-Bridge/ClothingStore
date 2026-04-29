@@ -1,6 +1,7 @@
 <?php
 session_start();
     require "../connect-db.php";
+    $loginUser;
     if(isset($_SESSION["id"])){
         $loginUser = $_SESSION["id"];
         $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$loginUser'");
@@ -18,6 +19,8 @@ session_start();
         location.href='authorization.php';
         </script>";
     }
+
+    $adresses = mysqli_fetch_all(mysqli_query($conn,"select * from Addresses where id_user = $loginUser"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +44,7 @@ session_start();
                 <h1>Личный кабинет</h1>
                 <div id="profile">
                     <div id="Kabinet">
-                        <a class="KabinetBtn selected" href="myprofile.php">
+                        <a class="KabinetBtn" href="myprofile.php">
                             <img src="../images/profileLogo.svg" alt="">
                             <p>Мой аккаунт</p>
                         </a>
@@ -57,7 +60,7 @@ session_start();
                             <img src="../images/lineDotsLogo.svg" alt="">
                             <p>Мои заказы</p>
                         </div>
-                        <a class="KabinetBtn" href="myadress.php">
+                        <a class="KabinetBtn  selected" href="myadress.php">
                             <img src="../images/pointerLogo.svg" alt="">
                             <p>Адреса</p>
                         </a>
@@ -75,73 +78,32 @@ session_start();
                         </div>
                     </div>
                     <div id="data">
-                        <h4>Приведствуем</h4>
-                        <div id="profileNavigation">
-                            <a class="nav-btn" href="profile.php">
-                                <img src="../images/profileLogo.svg" alt="">
-                                <p>Мой профиль</p>
-                            </a>
-                            <div class="nav-btn">
-                                <img src="../images/lineDotsLogo.svg" alt="">
-                                <p>Заказы</p>
-                            </div>
-                            <div class="nav-btn">
-                                <img src="../images/pointerLogo.svg" alt="">
-                                <p>Мои адреса</p>
-                            </div>
-                            <div class="nav-btn">
-                                <img src="../images/profileSettings.svg" alt="">
-                                <p>Редактировать профиль</p>
-                            </div>
-                            <div class="nav-btn">
-                                <img src="../images/star.svg" alt="">
-                                <p>Избранные товары</p>
-                            </div>
-                            <div class="nav-btn">
-                                <img src="../images/exitLogo.svg" alt="">
-                                <p>Выход</p>
-                            </div>
+                        <div>
+                            <h4>Ваши адреса</h4>
+                            <form action="../adress-db.php" method="post" class="d-flex" style="width: 1061px;">
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input type="text" class="form-control" id="floatingInputGroup2" placeholder="adress" name="adress">
+                                        <label for="floatingInputGroup2">Добавить адрес</label>
+                                    </div>
+                                </div>
+                                <button name="btnSave" style="width: 200px; height: 58px;" class="btn-black">Добавить</button>
+                            </form>
                         </div>
                         <div id="orderHistory">
-                            <h4>Текущие заказы</h4>
+                            <h4>Ваши адреса</h4>
                             <div id="table">
                                 <table>
                                     <tr>
-                                        <td>НОМЕР</td>
-                                        <td>ДАТА</td>
-                                        <td>СТАТУС</td>
-                                        <td>ИТОГ</td>
+                                        <td>АДРЕС</td>
+                                        <td>...</td>
                                     </tr>
+                                    <?php foreach($adresses as $adress):?>
                                     <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
+                                        <td><?=$adress[2]?></td>
+                                        <td><a href="../adress-db.php?id=<?=$adress[0]?>">Удалить</a></td>
                                     </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
+                                    <?php endforeach;?>
                                 </table>
                             </div>
                         </div>

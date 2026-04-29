@@ -119,7 +119,7 @@ $Item = mysqli_fetch_assoc($query);
                                 <p><?=$Item["price_item"]?> ₽</p>
                                 <p>РАЗМЕР - 40</p>
                             </div>
-                            <div class="btn-black">Добавить в корзину ></div>
+                            <a href="../basket-db.php?item=<?=$Item["id_item"]?>&addbskt=1&c=1" class="btn-black">Добавить в корзину ></a>
                         </div>
                     </div>
                 </div>

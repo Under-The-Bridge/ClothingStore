@@ -58,10 +58,10 @@
                         <img src="../images/lineDotsLogo.svg" alt="">
                         <p>Мои заказы</p>
                     </div>
-                    <div class="KabinetBtn">
-                        <img src="../images/pointerLogo.svg" alt="">
-                        <p>Адреса</p>
-                    </div>
+                        <a class="KabinetBtn" href="myadress.php">
+                            <img src="../images/pointerLogo.svg" alt="">
+                            <p>Адреса</p>
+                        </a>
                     <div class="KabinetBtn">
                         <img src="../images/adressLogo.svg" alt="">
                         <p>Редактировать адреса</p>

@@ -18,15 +18,19 @@ if (isset($user)) {
         if (mysqli_num_rows($check) > 0) {
             $sql = "update `Basket` set `item_count` = item_count + 1";
             $result = mysqli_query($conn, $sql);
-            echo "<script>
-            location.href='pages/catalog.php';
-            </script>";
         } else {
             $sql = "insert into `Basket`(`id_item`,`id_user`,`item_count`) values($item,$getUser,1)";
             $result = mysqli_query($conn, $sql);
             echo "<script>
             location.href='pages/catalog.php';
             </script>";
+        }
+        if(isset($_GET["c"])){
+                echo "<script>
+            location.href='pages/product.php?item=$item';
+            </script>";
+        }else{
+
         }
     } else if (isset($_GET["inc"])) {
         $sql = "update `Basket` set `item_count` = item_count + 1 where `id_user` = $getUser and `id_item` = $item";

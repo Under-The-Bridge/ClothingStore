@@ -18,6 +18,8 @@ $basket = mysqli_fetch_all($result, MYSQLI_ASSOC);
 foreach ($basket as $item) {
     $sum += $item["price_item"] * $item["item_count"];
 }
+
+$adresses = mysqli_fetch_all(mysqli_query($conn,"select * from Addresses where id_user = $user"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -37,29 +39,47 @@ foreach ($basket as $item) {
     <main>
         <div id="container">
             <p id="path">Главная / <span>Оформление заказа</span></p>
-            <form method="post" action="server/reg-db.php">
-                <div class="mb-3">
-                    <label for="login" class="form-label">Логин</label>
-                    <input type="text" class="form-control" id="login" name="login" required minlength="6">
+            <form method="post" action="../order-db.php" class="mb-3">
+                <h4>Оформление заказа</h4>
+                <h5>К оплате <?= $sum ?>₽</h5>
+                <input type="number" hidden value="<?= $sum ?>" name="price">
+                <div class="mb-3"> 
+                    <label for="adress" class="form-label">Адрес доставки</label>
+                    <select class="form-select" aria-label="Default select example" name="adress">
+                        <?php foreach($adresses as $adress):?>
+                            <option value="<?=$adress[0]?>"><?=$adress[2]?></option>
+                        <?php endforeach;?>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="fio" class="form-label">ФИО</label>
-                    <input type="text" class="form-control" id="fio" name="fio" required>
+                    <label for="fio" class="form-label">Дата</label>
+                    <input type="date" class="form-control" id="fio" required name="date">
                 </div>
-                <div class="mb-3">
-                    <label for="phone" class="form-label">Телефон</label>
-                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                <label for="">Способ оплаты</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="pay" id="radioDefault1" checked value="СБП">
+                    <label class="form-check-label" for="radioDefault1">
+                        СБП
+                    </label>
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Почта</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="pay" id="radioDefault2" value="По карте">
+                    <label class="form-check-label" for="radioDefault2">
+                        По карте
+                    </label>
                 </div>
-                <div class="mb-3">
-                    <label for="password" class="form-label">Пароль</label>
-                    <input type="password" class="form-control" id="password" name="password" required minlength="6">
-                </div>
-                <button type="submit" class="btn btn-primary">Зарегистрировать</button>
+                <button type="submit" class="btn btn-primary mt-3">Оформить заказ</button>
             </form>
+            <h4>Нет адреса?</h4>
+                                        <form action="../adress-db.php" method="post" class="d-flex" style="width: 100%;">
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input type="text" class="form-control" id="floatingInputGroup2" placeholder="adress" name="adress">
+                                        <label for="floatingInputGroup2">Добавить адрес</label>
+                                    </div>
+                                </div>
+                                <button name="order" style="width: 200px; height: 58px;" class="btn-black">Добавить</button>
+                            </form>
         </div>
     </main>
     <?php include "../components/footer.php" ?>
