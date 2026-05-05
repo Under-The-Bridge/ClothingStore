@@ -42,7 +42,7 @@
                                     Запомнить меня
                                 </label>
                             </div>
-                            <a class="link-secondary" href="email.php">Забыли пароль?</a>
+                            <a class="link-secondary" href="forgotpass.php">Забыли пароль?</a>
                         </div>
                         <div class="submitDiv">
                             <button name="btnAuth" type="submit" class="submitButton btn">Войти</button>

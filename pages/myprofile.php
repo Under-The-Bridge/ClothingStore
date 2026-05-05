@@ -1,23 +1,24 @@
 <?php
 session_start();
-    require "../connect-db.php";
-    if(isset($_SESSION["id"])){
-        $loginUser = $_SESSION["id"];
-        $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$loginUser'");
-        if(mysqli_num_rows($queryUser)>0){
-            $user = mysqli_fetch_assoc($queryUser);
-        }else{
-            echo "<script>
+require "../connect-db.php";
+if (isset($_SESSION["id"])) {
+    $loginUser = $_SESSION["id"];
+    $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$loginUser'");
+    if (mysqli_num_rows($queryUser) > 0) {
+        $user = mysqli_fetch_assoc($queryUser);
+    } else {
+        echo "<script>
             alert(\"Нет такого пользователя\");
             location.href='authorization.php';
             </script>";
-        }
-    }else{
-        echo "<script>
+    }
+} else {
+    echo "<script>
         alert(\"Войдите в профиль\");
         location.href='authorization.php';
         </script>";
-    }
+}
+$orders = mysqli_fetch_all(mysqli_query($conn, "select * from Orders where id_user = $loginUser"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +34,7 @@ session_start();
 </head>
 
 <body>
-<?php include "../components/header1.php" ?>
+    <?php include "../components/header1.php" ?>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Личный кабинет</span></p>
@@ -53,10 +54,10 @@ session_start();
                             <img src="../images/linesLogo.svg" alt="">
                             <p>История заказов</p>
                         </div>
-                        <div class="KabinetBtn">
+                        <a href="myorders.php" class="KabinetBtn">
                             <img src="../images/lineDotsLogo.svg" alt="">
                             <p>Мои заказы</p>
-                        </div>
+                        </a>
                         <a class="KabinetBtn" href="myadress.php">
                             <img src="../images/pointerLogo.svg" alt="">
                             <p>Адреса</p>
@@ -65,17 +66,17 @@ session_start();
                             <img src="../images/adressLogo.svg" alt="">
                             <p>Редактировать адреса</p>
                         </div>
-                        <div class="KabinetBtn">
+                        <a class="KabinetBtn" href="password.php">
                             <img src="../images/lockLogo.svg" alt="">
                             <p>Пароль</p>
-                        </div>
+                        </a>
                         <div class="KabinetBtn">
                             <img src="../images/exitLogo.svg" alt="">
                             <p>Выход</p>
                         </div>
                     </div>
                     <div id="data">
-                        <h4>Приведствуем</h4>
+                        <h4>Приветствуем</h4>
                         <div id="profileNavigation">
                             <a class="nav-btn" href="profile.php">
                                 <img src="../images/profileLogo.svg" alt="">
@@ -104,46 +105,69 @@ session_start();
                         </div>
                         <div id="orderHistory">
                             <h4>Текущие заказы</h4>
-                            <div id="table">
-                                <table>
-                                    <tr>
-                                        <td>НОМЕР</td>
-                                        <td>ДАТА</td>
-                                        <td>СТАТУС</td>
-                                        <td>ИТОГ</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                    <tr>
-                                        <td>#1234</td>
-                                        <td>17/02/2026</td>
-                                        <td>В обработке</td>
-                                        <td>6 769p</td>
-                                    </tr>
-                                </table>
-                            </div>
+                            <!-- <div id="orderHistory" style="width: 1061px"> -->
+                                <div id="table">
+                                    <table>
+                                        <tr>
+                                            <td>АДРЕС</td>
+                                            <td>СУММА</td>
+                                            <td>ДАТА ДОСТАВКИ</td>
+                                            <td>СПОСОБ ОПЛАТЫ</td>
+                                            <td>СТАТУС</td>
+                                        </tr>
+
+                                        <?php foreach ($orders as $order):
+                                            $order_id = $order[0] ?>
+                                            <tr>
+                                                <td>
+                                                    <?= $order[2] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $order[3] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $order[5] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $order[6] ?>
+                                                </td>
+                                                <td>
+                                                    <?= $order[7] ?>
+                                                </td>
+                                            </tr>
+                                            <!-- <tr>
+                                            <td> <a data-bs-toggle="collapse" href="#q<?= $order_id ?>" role="button"
+                                                    aria-expanded="false" aria-controls="q<?= $order_id ?>">
+                                                    Расскрыть
+                                                </a></td>
+                                        </tr> -->
+                                            <!-- <tr class="collapse" id="q<?= $order_id ?>">
+
+                                            <td>НАЗВАНИЕ</td>
+                                            <td>ЦЕНА</td>
+                                            <td>ОПИСАНИЕ</td>
+                                            <td>СТАТУС ТОВАРА</td>
+                                            <td>ССЫЛКА</td>
+                                        </tr> -->
+
+                                            <?php
+                                            $items = mysqli_fetch_all(mysqli_query($conn, "select * from Order_Item join Item on Item.id_item = Order_Item.id_item join Categories on Categories.id_category = Item.id_category where id_order = $order_id"), MYSQLI_ASSOC);
+                                            foreach ($items as $item): ?>
+
+                                                <!-- <tr class="collapse" id="q<?= $order_id ?>">
+                                                <td><img src="../images/<?= $item["img_item"] ?>" alt="<?= $item["name_item"] ?>"
+                                                        alt=""></td>
+                                                <td><?= $item['name_item'] ?></td>
+                                                <td><?= $item['price_item'] ?></td>
+                                                <td><?= $item['status_item'] ?></td>
+                                                <td><a href="product.php?item=<?= $item['id_item'] ?>">Перейти</a></td>
+                                            </tr> -->
+                                            <?php endforeach; ?>
+
+                                        <?php endforeach; ?>
+                                    </table>
+                                </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>

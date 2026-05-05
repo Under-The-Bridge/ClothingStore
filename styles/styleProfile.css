@@ -150,3 +150,8 @@ main {
     border-bottom: 1px solid #EBEBEB;
   }
 }
+
+td>img{
+  width: 100px;
+  aspect-ratio: 1/1;
+}

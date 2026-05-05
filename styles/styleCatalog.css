@@ -77,7 +77,7 @@ main {
     justify-content: center;
 }
 
-a{
+a {
     color: black;
     text-decoration: none;
 }
@@ -200,16 +200,17 @@ header {
     justify-content: center;
     align-items: start;
 }
-.count{
-  position: absolute;
-  width: 25px;
-  transform: translateX(25px);
-  background-color: #49d0ff;
-  color: white !important;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 25px;
+
+.count {
+    position: absolute;
+    width: 25px;
+    transform: translateX(25px);
+    background-color: #49d0ff;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 25px;
 }
 
 .header-profile-item:nth-child(5) {
@@ -270,9 +271,9 @@ header {
     flex-direction: column;
     gap: 30px;
 
-    input {
+    /* input {
         width: 100%;
-    }
+    } */
 }
 
 #filterPrice {
@@ -452,6 +453,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
+    gap: 15px;
 }
 
 footer {
@@ -605,19 +607,43 @@ h4 {
     font-size: 23px;
 }
 
+.item-card:hover {
+    scale: 1.005;
+}
+.cat label{
+    width: 150px;
+}
+
 .item-card {
+    transition: 0.15s ease-in;
     width: 318px;
     display: flex;
     flex-direction: column;
     color: #000000;
     text-decoration: none;
-    
-    .btn{
+    /* box-sizing: border-box; */
+    border-radius: 15px;
+    box-shadow: 10px 10px 25px rgb(248, 248, 248);
+
+    >* {
+        padding: 10px 5px;
+    }
+
+    .btn {
+        border-radius: 10px;
+        width: 35px;
+        aspect-ratio: 1/1;
         align-self: center;
         color: white;
-        width: 90%;
         background: #49d0ff;
-        border:none;
+        border: none;
+        background-image: url(../images/korzina.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .btn.in{
+        filter: grayscale(0.75);
     }
 
     .star {
@@ -628,8 +654,10 @@ h4 {
     }
 
     .item-card-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         height: 54px;
-        cursor: pointer;
 
         p {
             height: 10px;

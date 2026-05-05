@@ -1,5 +1,9 @@
 <?php
 require "../connect-db.php";
+session_start();
+if (isset($_SESSION["id"])) {
+    $user = $_SESSION["id"];
+}
 $Item = $_GET["item"];
 $query = mysqli_query($conn, "select * from Item join Categories on Item.id_category = Categories.id_category where id_item = $Item");
 $Item = mysqli_fetch_assoc($query);
@@ -23,7 +27,7 @@ $Item = mysqli_fetch_assoc($query);
 </head>
 
 <body>
-<?php include "../components/header1.php" ?>
+    <?php include "../components/header1.php" ?>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Личный кабинет</span></p>
@@ -31,18 +35,18 @@ $Item = mysqli_fetch_assoc($query);
                 <div id="card">
                     <div id="imagePanel">
                         <div>
-                            <img src="../images/<?=$Item["name_category"]?>/<?=$Item["img_item"]?>" alt="">
+                            <img src="../images/<?= $Item["img_item"] ?>" alt="">
                         </div>
                         <div>
                             <div>
-                                <div class="underImg"><img src="../images/<?=$Item["name_category"]?>/<?=$Item["img_item"]?>" alt=""></div>
-                                <div class="underImg"><img src="../images/<?=$Item["name_category"]?>/<?=$Item["img_item"]?>" alt=""></div>
-                                <div class="underImg"><img src="../images/<?=$Item["name_category"]?>/<?=$Item["img_item"]?>" alt=""></div>
+                                <div class="underImg"><img src="../images/<?= $Item["img_item"] ?>" alt=""></div>
+                                <div class="underImg"><img src="../images/<?= $Item["img_item"] ?>" alt=""></div>
+                                <div class="underImg"><img src="../images/<?= $Item["img_item"] ?>" alt=""></div>
                             </div>
                         </div>
                     </div>
                     <div id="somePanel">
-                        <h1><?=$Item["name_item"]?></h1>
+                        <h1><?= $Item["name_item"] ?></h1>
                         <p>EU размеры:</p>
                         <div id="sizes">
                             <div class="sizeElem">
@@ -116,10 +120,20 @@ $Item = mysqli_fetch_assoc($query);
                         </div>
                         <div id="price">
                             <div>
-                                <p><?=$Item["price_item"]?> ₽</p>
+                                <p><?= $Item["price_item"] ?> ₽</p>
                                 <p>РАЗМЕР - 40</p>
                             </div>
-                            <a href="../basket-db.php?item=<?=$Item["id_item"]?>&addbskt=1&c=1" class="btn-black">Добавить в корзину ></a>
+                            <?php if (isset($_SESSION["id"])): ?>
+                                <?php if (mysqli_num_rows(mysqli_query($conn, "select * from Basket where id_item =" . $Item["id_item"] . " and id_user = $user")) == 0): ?>
+                                    <a href="../basket-db.php?item=<?= $Item["id_item"] ?>&addbskt=1" class="btn-black">Добавить
+                                        в корзину</a>
+                                <?php else: ?>
+                                    <a href="basket.php" class="btn-black">Перейти в корзину</a>
+                                <?php endif; ?>
+                            <?php else: ?>
+                                                                        <a href="../basket-db.php?item=<?= $Item["id_item"] ?>&addbskt=1" class="btn-black">Добавить
+                                            в корзину</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -135,14 +149,14 @@ $Item = mysqli_fetch_assoc($query);
                             <p>Артикул</p>
                             <div>
                                 <div></div>
-                                <p><?=$Item["id_item"]?></p>
+                                <p><?= $Item["id_item"] ?></p>
                             </div>
                         </div>
                         <div>
                             <p>Категория</p>
                             <div>
                                 <div></div>
-                                <p><?=$Item["name_category"]?></p>
+                                <p><?= $Item["name_category"] ?></p>
                             </div>
                         </div>
                         <div>

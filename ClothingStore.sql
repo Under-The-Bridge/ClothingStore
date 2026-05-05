@@ -122,7 +122,7 @@ CREATE TABLE `Order_Item` (
   `id_item` int NOT NULL,
   `id_order` int NOT NULL,
   `count` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 

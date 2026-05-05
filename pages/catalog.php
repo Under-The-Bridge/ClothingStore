@@ -2,44 +2,46 @@
 require "../connect-db.php";
 session_start();
 $user = false;
-if(isset($_SESSION['id'])){
+if (isset($_SESSION['id'])) {
     $user = $_SESSION['id'];
     $query = mysqli_fetch_array(mysqli_query($conn, "select sum(item_count) from Basket where id_user = $user"))[0];
 }
 $getUser = mysqli_fetch_assoc(mysqli_query($conn, "Select * from Users where id_user = '$user'"))["id_user"] ?? false;
 $minprice = $_GET["min-price"] ?? 0;
 $maxprice = $_GET["max-price"] ?? 100000;
-$category = $_GET["category"] ?? false;
+$categorys = $_GET["category"] ?? false;
 $sort = $_GET["sort"] ?? 0;
+$sql = "select * from Item join Categories on Item.id_category = Categories.id_category where status_item = 'Доступен'";
 
-$sql = "select * from Item join Categories on Item.id_category = Categories.id_category";
+$sql .= " and price_item between $minprice and $maxprice";
 
-$sql .= " where price_item between $minprice and $maxprice";
-
-if(isset($_GET["search"])){
-    $search_value = $_GET["search-value"];
-    $sql .= " and name_item like '%$search_value%'";
-}else{
-    if($category){
-        for($i = 0; $i < count($category); $i++){
-            $temp = $category[$i];
-            if($i == 0){
-                $sql .= " and id_category = $temp";
-            }else{
-                $sql .= " or id_category = $temp";      
-            }
-        }
-    }
-    if($sort != 0){
-        $sql .= " order by price_item $sort";
-    }
+if (isset($_GET["search"])) {
+    $search_value = strtolower($_GET["search-value"]);
+    $sql .= " and LOWER(name_item) like '%$search_value%'";
+} else {
+    // if ($category) {
+    //     for ($i = 0; $i < count($category); $i++) {
+    //         $temp = $category[$i];
+    //         if ($i == 0) {
+    //             $sql .= " and id_category = $temp";
+    //         } else {
+    //             $sql .= " or id_category = $temp";
+    //         }
+    //     }
+    // }
+}
+if ($categorys) {
+    $sql .= " and Item.id_category = $categorys";
+}
+if ($sort != 0) {
+    $sql .= " order by price_item $sort";
 }
 $q = mysqli_query($conn, $sql);
 
-$categories = mysqli_fetch_all(mysqli_query($conn, "Select * from Categories"),MYSQLI_ASSOC);
+$categories = mysqli_fetch_all(mysqli_query($conn, "Select * from Categories"), MYSQLI_ASSOC);
 
 
-$Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
+$Items = mysqli_fetch_all($q, MYSQLI_ASSOC);
 
 ?>
 
@@ -59,25 +61,30 @@ $Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
 </head>
 
 <body>
-<?php include "../components/header2.php" ?>
+    <?php include "../components/header2.php" ?>
 
     <main>
         <div id="container">
             <p id="path">Главная / <span>Каталог</span></p>
             <div id="catalog">
                 <form id="filterPanel">
+                    <?php if (isset($_GET["search"])): ?>
+                        <input type="hidden" value="<?= isset($_GET["search-value"]) ? $_GET["search-value"] : "" ?>"
+                            name="search-value">
+                        <input type="hidden" name="search">
+                    <?php endif; ?>
                     <div class="filter">
-                        
+
                         <div class="filterTitle">
                             <p>Категории</p>
-                            <p>v</p>
                         </div>
-                        <?php foreach($categories as $category):?>
-                            <p>
-                                <label for="checkbox"><?=$category["name_category"]?></label>
-                                <input id="checkbox" type="checkbox" value="<?=$category["id_category"]?>" name="category[]">
+                        <?php foreach ($categories as $category): ?>
+                            <p class="cat">
+                                <label for="radio"><?= $category["name_category"] ?></label>
+                                <input id="radio" type="radio" value="<?= $category["id_category"] ?>" name="category"
+                                    <?= $categorys == $category["id_category"] ? "checked" : "" ?>>
                             </p>
-                        <?php endforeach;?>
+                        <?php endforeach; ?>
                     </div>
                     <div class="filter">
                         <div class="filterTitle">
@@ -88,20 +95,24 @@ $Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
                             <div class="price-input" style="">
                                 <div class="field">
                                     <label for="min">Мин цена</label>
-                                    <input id="min"type="number" class="input-min" value="<?=$minprice?>" name="min-price">
+                                    <input id="min" type="number" class="input-min" value="<?= $minprice ?>"
+                                        name="min-price">
                                 </div>
                                 <div class="separator">-</div>
                                 <div class="field">
                                     <label for="max">Макс цена</label>
-                                    <input id="max" type="number" class="input-max" value="<?=$maxprice?>" name="max-price">
+                                    <input id="max" type="number" class="input-max" value="<?= $maxprice ?>"
+                                        name="max-price">
                                 </div>
                             </div>
                             <div class="slider">
                                 <div class="progress"></div>
                             </div>
                             <div class="range-input">
-                                <input type="range" class="range-min" min="0" max="10000" value="<?=$minprice?>" step="100">
-                                <input type="range" class="range-max" min="0" max="10000" value="<?=$maxprice?>" step="100">
+                                <input type="range" class="range-min" min="0" max="10000" value="<?= $minprice ?>"
+                                    step="100">
+                                <input type="range" class="range-max" min="0" max="10000" value="<?= $maxprice ?>"
+                                    step="100">
                             </div>
                         </div>
                         <!-- <p id="filterPrice">
@@ -116,12 +127,12 @@ $Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
                     <div class="filter">
                         <label for="sort">Сортировка</label>
                         <select name="sort" id="sort">
-                            <option value="0" <?=$sort == "0"?"checked":""?>>Не выбрано</option>
-                            <option value="ASC" <?=$sort == "ASC"?"checked":""?>>по возрастанию</option>
-                            <option value="DESC" <?=$sort == "DESC"?"checked":""?>>по убыванию</option>
+                            <option value="0" <?= $sort == "0" ? "selected" : "" ?>>Не выбрано</option>
+                            <option value="ASC" <?= $sort == "ASC" ? "selected" : "" ?>>по возрастанию</option>
+                            <option value="DESC" <?= $sort == "DESC" ? "selected" : "" ?>>по убыванию</option>
                         </select>
                     </div>
-                    <div class="filter">
+                    <!-- <div class="filter">
                         <div class="filterTitle">
                             <p>Размер (EU)</p>
                             <p>v</p>
@@ -382,13 +393,13 @@ $Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
                                 <p>Цвет</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="filter">
+                    </div> -->
+                    <!-- <div class="filter">
                         <div class="filterTitle">
                             <p>x</p>
                             <p>СБРОСИТЬ ВСЕ ФИЛЬТРЫ</p>
                         </div>
-                    </div>
+                    </div> -->
                     <button class="filter" style="background:#49d0ff; color: white;">
                         <div class="filterTitle">
                             <p>x</p>
@@ -405,21 +416,35 @@ $Items = mysqli_fetch_all($q,MYSQLI_ASSOC);
                 </form>
                 <div id="catalogItems">
                     <h1>Каталог</h1>
-                    <p><?=mysqli_num_rows($q)?> товаров</p>
+                    <p><?= mysqli_num_rows($q) ?> товаров</p>
                     <div id="items">
-                        <?php foreach($Items as $Item):?>
-                        <div class="item-card">
-                            <a href="product.php?item=<?=$Item["id_item"]?>" class="item-card">
-                                <p class="star">☆</p>
-                                <img src="../images/<?=$Item["name_category"]?>/<?=$Item["img_item"]?>" alt="<?=$Item["name_item"]?>">
-                                <div class="item-card-text">
-                                    <p><?=$Item["name_item"]?></p>
-                                    <p>от <?=$Item["price_item"]?> ₽</p>
+                        <?php foreach ($Items as $Item): ?>
+                            <div class="item-card">
+                                <div class="item-card">
+                                    <p class="star">☆</p>
+                                    <a href="product.php?item=<?= $Item["id_item"] ?>">
+                                        <img src="../images/<?= $Item["img_item"] ?>" alt="<?= $Item["name_item"] ?>">
+                                    </a>
+                                    <div class="item-card-text">
+                                        <div>
+                                            <p><?= $Item["name_item"] ?></p>
+                                            <p>от <?= $Item["price_item"] ?> ₽</p>
+                                        </div>
+                                        <?php if (isset($_SESSION["id"])): ?>
+                                            <?php if (mysqli_num_rows(mysqli_query($conn, "select * from Basket where id_item =" . $Item["id_item"] . " and id_user = $user")) == 0): ?>
+                                                <a href="../basket-db.php?item=<?= $Item["id_item"] ?>&addbskt=1"
+                                                    class="btn btn-primary"></a>
+                                            <?php else: ?>
+                                                <a href="basket.php" class="btn btn-primary in"></a>
+                                            <?php endif; ?>
+                                        <?php else: ?>
+                                            <a href="../basket-db.php?item=<?= $Item["id_item"] ?>&addbskt=1"
+                                                class="btn btn-primary"></a>
+                                        <?php endif; ?>
+                                    </div>
                                 </div>
-                            </a>
-                                <a href="../basket-db.php?item=<?=$Item["id_item"]?>&addbskt=1" class="btn btn-primary">Добавить в корзину</a>
-                        </div>
-                        <?php endforeach;?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>

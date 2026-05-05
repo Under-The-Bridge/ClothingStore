@@ -11,7 +11,7 @@ if (isset($_SESSION["id"])) {
     <div id="header-items">
         <a id="header-logo" href="/"></a>
         <div id="header-btns">
-            <div class="dropdown">
+            <!-- <div class="dropdown">
                 <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
                     Одежда
@@ -78,32 +78,27 @@ if (isset($_SESSION["id"])) {
                     <li><button class="dropdown-item" type="button">Оплата</button></li>
                     <li><button class="dropdown-item" type="button">FAQ</button></li>
                 </ul>
-            </div>
-            <!-- <div class="header-btn">Одежда<p>ᐯ</p>
-            </div>
-            <div class="header-btn">Обувь<p>ᐯ</p>
-            </div>
-            <div class="header-btn">Аксессуары<p>ᐯ</p>
-            </div>
-            <div class="header-btn">Бренды<p>ᐯ</p>
-            </div>
-            <div class="header-btn">Расчет стоимости<p>ᐯ</p>
-            </div>
-            <div class="header-btn">Информация<p>ᐯ</p>
             </div> -->
+            <a href="catalog.php" class="header-btn">Одежда</a>
+            <a href="catalog.php" class="header-btn">Обувь</a>
+            <a href="catalog.php" class="header-btn">Аксессуары</a>
+            <a href="catalog.php" class="header-btn">Бренды</a>
+            <a href="catalog.php" class="header-btn">Расчет стоимости</a>
+            <a href="catalog.php" class="header-btn">Информация</a>
         </div>
         <div id="header-profile-items">
             <a class="header-profile-item" href="catalog.php"></a>
             <a class="header-profile-item"></a>
             <? if (!isset($_SESSION["id"])): ?>
                 <a class="header-profile-item" href="authorization.php"></a>
+                <a class="header-profile-item" href="basket.php"></a>
+                </div>
             <? else: ?>
                 <a class="header-profile-item" href="myprofile.php"></a>
+                <a class="header-profile-item" href="basket.php">
+                    <p class="count"><?php if (isset($query)) echo $query ?></p>
+                    </a>
+                </div>
             <? endif; ?>
-            <a class="header-profile-item" href="basket.php">
-                <p class="count"><?php if (isset($query))
-                    echo $query ?></p>
-                </a>
-            </div>
         </div>
     </header>

@@ -1,26 +1,26 @@
 <?php
 session_start();
-    require "../connect-db.php";
-    $loginUser;
-    if(isset($_SESSION["id"])){
-        $loginUser = $_SESSION["id"];
-        $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$loginUser'");
-        if(mysqli_num_rows($queryUser)>0){
-            $user = mysqli_fetch_assoc($queryUser);
-        }else{
-            echo "<script>
+require "../connect-db.php";
+$loginUser;
+if (isset($_SESSION["id"])) {
+    $loginUser = $_SESSION["id"];
+    $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$loginUser'");
+    if (mysqli_num_rows($queryUser) > 0) {
+        $user = mysqli_fetch_assoc($queryUser);
+    } else {
+        echo "<script>
             alert(\"Нет такого пользователя\");
             location.href='authorization.php';
             </script>";
-        }
-    }else{
-        echo "<script>
+    }
+} else {
+    echo "<script>
         alert(\"Войдите в профиль\");
         location.href='authorization.php';
         </script>";
-    }
+}
 
-    $adresses = mysqli_fetch_all(mysqli_query($conn,"select * from Addresses where id_user = $loginUser"));
+$adresses = mysqli_fetch_all(mysqli_query($conn, "select * from Addresses where id_user = $loginUser"));
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +36,7 @@ session_start();
 </head>
 
 <body>
-<?php include "../components/header1.php" ?>
+    <?php include "../components/header1.php" ?>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Личный кабинет</span></p>
@@ -56,10 +56,10 @@ session_start();
                             <img src="../images/linesLogo.svg" alt="">
                             <p>История заказов</p>
                         </div>
-                        <div class="KabinetBtn">
+                        <a href="myorders.php" class="KabinetBtn">
                             <img src="../images/lineDotsLogo.svg" alt="">
                             <p>Мои заказы</p>
-                        </div>
+                        </a>
                         <a class="KabinetBtn  selected" href="myadress.php">
                             <img src="../images/pointerLogo.svg" alt="">
                             <p>Адреса</p>
@@ -68,10 +68,10 @@ session_start();
                             <img src="../images/adressLogo.svg" alt="">
                             <p>Редактировать адреса</p>
                         </div>
-                        <div class="KabinetBtn">
+                        <a class="KabinetBtn" href="password.php">
                             <img src="../images/lockLogo.svg" alt="">
                             <p>Пароль</p>
-                        </div>
+                        </a>
                         <div class="KabinetBtn">
                             <img src="../images/exitLogo.svg" alt="">
                             <p>Выход</p>
@@ -83,11 +83,13 @@ session_start();
                             <form action="../adress-db.php" method="post" class="d-flex" style="width: 1061px;">
                                 <div class="input-group has-validation">
                                     <div class="form-floating is-invalid">
-                                        <input type="text" class="form-control" id="floatingInputGroup2" placeholder="adress" name="adress">
+                                        <input type="text" class="form-control" id="floatingInputGroup2"
+                                            placeholder="adress" name="adress">
                                         <label for="floatingInputGroup2">Добавить адрес</label>
                                     </div>
                                 </div>
-                                <button name="btnSave" style="width: 200px; height: 58px;" class="btn-black">Добавить</button>
+                                <button name="btnSave" style="width: 200px; height: 58px;"
+                                    class="btn-black">Добавить</button>
                             </form>
                         </div>
                         <div id="orderHistory">
@@ -98,12 +100,12 @@ session_start();
                                         <td>АДРЕС</td>
                                         <td>...</td>
                                     </tr>
-                                    <?php foreach($adresses as $adress):?>
-                                    <tr>
-                                        <td><?=$adress[2]?></td>
-                                        <td><a href="../adress-db.php?id=<?=$adress[0]?>">Удалить</a></td>
-                                    </tr>
-                                    <?php endforeach;?>
+                                    <?php foreach ($adresses as $adress): ?>
+                                        <tr>
+                                            <td><?= $adress[2] ?></td>
+                                            <td><a href="../adress-db.php?id=<?= $adress[0] ?>">Удалить</a></td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </table>
                             </div>
                         </div>

@@ -1,3 +1,9 @@
+<?php
+require "connect-db.php";
+
+$items = mysqli_fetch_all(mysqli_query($conn,"select * from Item join Categories on Categories.id_category = Item.id_category"),MYSQLI_ASSOC);
+$categories = mysqli_fetch_all(mysqli_query($conn,"select * from Categories"));
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +31,8 @@
                             <div id="panel-text-h1">Широкий ассортимент Одежды</div>
                             <div id="panel-text-h2">Одежда от известные брендов у нас в каталоге. Только качественные
                                 вещи.</div>
-                            <div id="panel-text-btn">Перейти в каталог <p>❯</p>
-                            </div>
+                            <a href="pages/catalog.php" id="panel-text-btn">Перейти в каталог <p>❯</p>
+</a>
                         </div>
                         <div id="arrows">
                             <div>❮</div>
@@ -41,41 +47,23 @@
                 <div>
                     <div class="item-show-text">
                         <h2>Обувь</h2>
-                        <span>больше товаров <p>❯</p></span>
+                        <a href="pages/catalog.php">больше товаров <p>❯</p></a>
                     </div>
                     <div class="items-to-show">
-                        <div class="item-card">
+                        <?php $temp = 0;
+                        foreach($items as $item):
+                        if($item["id_category"] != $categories[0][0]) continue;
+                        $temp++;
+                        if($temp == 5) break;?>
+                        <a class="item-card" href="pages/product.php?item=<?=$item['id_item']?>">
                             <p class="star">☆</p>
-                            <img src="images/nikecourt.png" alt>
+                            <img src="../images/<?= $item["img_item"] ?>" alt>
                             <div class="item-card-text">
-                                <p>Nike Court Zoom Cage 2</p>
-                                <p>от 4 699 ₽</p>
+                                <p><?=$item["name_item"]?></p>
+                                <p><?=$item["price_item"]?></p>
                             </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/airforce.png" alt>
-                            <div class="item-card-text">
-                                <p>Air Force 1 Ultra</p>
-                                <p>от 6 789 ₽</p>
-                            </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/airforcefly.png" alt>
-                            <div class="item-card-text">
-                                <p>Air Force 1 Ultra Flyknit</p>
-                                <p>от 3 129 ₽</p>
-                            </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/mensoccer.png" alt>
-                            <div class="item-card-text">
-                                <p>Men’s Soccer Shoes</p>
-                                <p>от 2 699 ₽</p>
-                            </div>
-                        </div>
+                        </a>
+                        <?php endforeach;?>
                     </div>
                     <div class="items-pagination">
                         <div>
@@ -92,42 +80,24 @@
             <div class="item-show-elem">
                 <div>
                     <div class="item-show-text">
-                        <h2>Одежда</h2>
-                        <span>больше товаров <p>❯</p></span>
+                        <h2>Обувь</h2>
+                        <a href="pages/catalog.php">больше товаров <p>❯</p></a>
                     </div>
                     <div class="items-to-show">
-                        <div class="item-card">
+                        <?php $temp = 0;
+                        foreach($items as $item):
+                        if($item["id_category"] != $categories[1][0]) continue;
+                        $temp++;
+                        if($temp == 5) break;?>
+                        <a class="item-card" href="pages/product.php?item=<?=$item['id_item']?>">
                             <p class="star">☆</p>
-                            <img src="images/cloth1.png" alt>
+                            <img src="../images/<?= $item["img_item"] ?>" alt>
                             <div class="item-card-text">
                                 <p>Nike Court Zoom Cage 2</p>
                                 <p>от 4 699 ₽</p>
                             </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/cloth2.png" alt>
-                            <div class="item-card-text">
-                                <p>Air Force 1 Ultra</p>
-                                <p>от 6 789 ₽</p>
-                            </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/cloth3.png" alt>
-                            <div class="item-card-text">
-                                <p>Air Force 1 Ultra Flyknit</p>
-                                <p>от 3 129 ₽</p>
-                            </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/cloth4.png" alt>
-                            <div class="item-card-text">
-                                <p>Men’s Soccer Shoes</p>
-                                <p>от 2 699 ₽</p>
-                            </div>
-                        </div>
+                        </a>
+                        <?php endforeach;?>
                     </div>
                     <div class="items-pagination">
                         <div>
@@ -144,42 +114,24 @@
             <div class="item-show-elem">
                 <div>
                     <div class="item-show-text">
-                        <h2>Аксессуары</h2>
-                        <span>больше товаров <p>❯</p></span>
+                        <h2>Обувь</h2>
+                        <a href="pages/catalog.php">больше товаров <p>❯</p></a>
                     </div>
                     <div class="items-to-show">
-                        <div class="item-card">
+                        <?php $temp = 0;
+                        foreach($items as $item):
+                        if($item["id_category"] != $categories[2][0]) continue;
+                        $temp++;
+                        if($temp == 5) break;?>
+                        <a class="item-card" href="pages/product.php?item=<?=$item['id_item']?>">
                             <p class="star">☆</p>
-                            <img src="images/acsess1.png" alt>
+                            <img src="../images/<?= $item["img_item"] ?>" alt>
                             <div class="item-card-text">
                                 <p>Nike Court Zoom Cage 2</p>
                                 <p>от 4 699 ₽</p>
                             </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/acsess2.png" alt>
-                            <div class="item-card-text">
-                                <p>Air Force 1 Ultra</p>
-                                <p>от 6 789 ₽</p>
-                            </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/acsess3.png" alt>
-                            <div class="item-card-text">
-                                <p>Air Force 1 Ultra Flyknit</p>
-                                <p>от 3 129 ₽</p>
-                            </div>
-                        </div>
-                        <div class="item-card">
-                            <p class="star">☆</p>
-                            <img src="images/acsess4.png" alt>
-                            <div class="item-card-text">
-                                <p>Men’s Soccer Shoes</p>
-                                <p>от 2 699 ₽</p>
-                            </div>
-                        </div>
+                        </a>
+                        <?php endforeach;?>
                     </div>
                     <div class="items-pagination">
                         <div>

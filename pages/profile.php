@@ -1,23 +1,23 @@
 <?php
-    require "../connect-db.php";
-    session_start();
-    if(isset($_SESSION['id'])){
-        $user = $_SESSION['id'];
-        $queryUser = mysqli_query($conn, "Select * from Users where email = '$user'");
-        if(mysqli_num_rows($queryUser)>0){
-            $user = mysqli_fetch_assoc($queryUser);
-        }else{
-            echo "<script>
+require "../connect-db.php";
+session_start();
+if (isset($_SESSION['id'])) {
+    $user = $_SESSION['id'];
+    $queryUser = mysqli_query($conn, "Select * from Users where id_user = '$user'");
+    if (mysqli_num_rows($queryUser) > 0) {
+        $user = mysqli_fetch_assoc($queryUser);
+    } else {
+        echo "<script>
             alert(\"Нет такого пользователя\");
             location.href='authorization.php';
             </script>";
-        }
-    }else{
-        echo "<script>
+    }
+} else {
+    echo "<script>
         alert(\"Войдите в профиль\");
         location.href='authorization.php';
         </script>";
-    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,7 +33,7 @@
 </head>
 
 <body>
-<?php include "../components/header1.php" ?>
+    <?php include "../components/header1.php" ?>
     <main>
         <div id="container">
             <p id="path">Главная / <span>Личный кабинет</span></p>
@@ -65,50 +65,57 @@
                             <img src="../images/adressLogo.svg" alt="">
                             <p>Редактировать адреса</p>
                         </div>
-                        <div class="KabinetBtn">
+                        <a class="KabinetBtn" href="password.php">
                             <img src="../images/lockLogo.svg" alt="">
                             <p>Пароль</p>
-                        </div>
+                        </a>
                         <div class="KabinetBtn">
                             <img src="../images/exitLogo.svg" alt="">
                             <p>Выход</p>
                         </div>
                     </div>
-                <form action="" method="POST">
-                <div id="data">
-                        <h4>Ваши данные</h4>
-                        <div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input disabled type="text" class="form-control" id="floatingInputGroup2" placeholder="Username" name="nameForm" value="<?=$user["name"]?>">
-                                    <label for="floatingInputGroup2">Имя:</label>
+                    <form action="" method="POST">
+                        <div id="data">
+                            <h4>Ваши данные</h4>
+                            <div>
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input disabled type="text" class="form-control" id="floatingInputGroup2"
+                                            placeholder="Username" name="nameForm" value="<?= $user["name"] ?>">
+                                        <label for="floatingInputGroup2">Имя:</label>
+                                    </div>
+                                </div>
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input disabled type="text" class="form-control" id="floatingInputGroup2"
+                                            placeholder="Username" name="surnameForm" value="<?= $user["surname"] ?>">
+                                        <label for="floatingInputGroup2">Фамилия:</label>
+                                    </div>
+                                </div>
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input disabled type="text" class="form-control" id="floatingInputGroup2"
+                                            placeholder="Username" name="patronamicForm"
+                                            value="<?= $user["patronymic"] ?>">
+                                        <label for="floatingInputGroup2">Отчетсво:</label>
+                                    </div>
+                                </div>
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input disabled type="email" class="form-control" id="floatingInputGroup2"
+                                            placeholder="Username" value="temp@temp.com" name="emailForm"
+                                            value="<?= $user["email"] ?>">
+                                        <label for="floatingInputGroup2">Email адрес:</label>
+                                    </div>
+                                </div>
+                                <div class="input-group has-validation">
+                                    <div class="form-floating is-invalid">
+                                        <input disabled type="tel" class="form-control" id="floatingInputGroup2"
+                                            placeholder="Username" name="phoneForm" value="<?= $user["phone"] ?>">
+                                        <label for="floatingInputGroup2">Номер телефона:</label>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input disabled type="text" class="form-control" id="floatingInputGroup2" placeholder="Username" name="surnameForm" value="<?=$user["surname"]?>">
-                                    <label for="floatingInputGroup2">Фамилия:</label>
-                                </div>
-                            </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input disabled type="text" class="form-control" id="floatingInputGroup2" placeholder="Username" name="patronamicForm" value="<?=$user["patronymic"]?>">
-                                    <label for="floatingInputGroup2">Отчетсво:</label>
-                                </div>
-                            </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input disabled type="email" class="form-control" id="floatingInputGroup2" placeholder="Username" value="temp@temp.com" name="emailForm" value="<?=$user["email"]?>">
-                                    <label for="floatingInputGroup2">Email адрес:</label>
-                                </div>
-                            </div>
-                            <div class="input-group has-validation">
-                                <div class="form-floating is-invalid">
-                                    <input disabled type="tel" class="form-control" id="floatingInputGroup2" placeholder="Username" name="phoneForm" value="<?=$user["phone"]?>">
-                                    <label for="floatingInputGroup2">Номер телефона:</label>
-                                </div>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

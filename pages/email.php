@@ -3,7 +3,7 @@
 // mail("d.n1zamov@yandex.ru","d.n1zamov@yandex.ru","d.n1zamov@yandex.ru");
 // mail("motyatrue@yandex.ru");
 if(isset($_POST["email"])){
-    mail($_POST["email"],"ramazanikbaev@yandex.ru","<h1>qweqwe</h1>");
+    mail($_POST["email"],$_POST["email"],$_POST["email"]);
 }
 ?>
 <!DOCTYPE html>

@@ -40,29 +40,25 @@ $basket = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         <?php foreach ($basket as $item):
                             $sum += $item["price_item"] * $item["item_count"];
                             ?>
-                            <div class="item">
-                                <a href="product.php?item=<?= $item["id_item"] ?>"><img
-                                        src="../images/<?= $item["name_category"] ?>/<?= $item["img_item"] ?>" alt=""></a>
-                                <div class="item-desc">
-                                    <div class="item-name">
-                                        <h2><?= $item["name_item"] ?></h2>
-                                        <div class="item_count">
-                                            <a href="/basket-db.php?item=<?= $item["id_item"] ?>&decr=1"
-                                                class="btn btn-primary">-</a>
-                                            <span><?= $item["item_count"] ?></span>
-                                            <a href="/basket-db.php?item=<?= $item["id_item"] ?>&inc=1"
-                                                class="btn btn-primary">+</a>
-                                        </div>
-                                        <h2>
-                                            <?= $item["price_item"] ?>
-                                            ₽
-                                        </h2>
-                                    </div>
-                                    <p><?= $item["description_item"] ?></p>
-                                    <p></p>
-                                </div>
+                            <div class="item-card">
                                 <div>
-                                    <a href="/basket-db.php?item=<?= $item["id_item"] ?>&del=1">Удалить</a>
+                                    <a href="product.php?item=<?= $item["id_item"] ?>">
+                                        <img src="../images/<?= $item["img_item"] ?>" alt="<?= $item["name_item"] ?>">
+                                    </a>
+                                    <div class="item-card-text">
+                                        <div>
+                                            <p class="mb-3"><?= $item["name_item"] ?></p>
+                                            <p class="mb-3"><?= $item["price_item"] ?> ₽ x <?= $item["item_count"] ?>шт. = <?= $item["price_item"] * $item["item_count"] ?> ₽</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="actions">
+                                    <a href="/basket-db.php?item=<?= $item["id_item"] ?>&inc=1" class="btn btn-primary">+</a>
+                                    <span>
+                                        <?= $item["item_count"] ?>
+                                    </span>
+                                    <a href="/basket-db.php?item=<?= $item["id_item"] ?>&decr=1" class="btn btn-primary">-</a>
+                                    <a href="/basket-db.php?item=<?= $item["id_item"] ?>&del=1" class="btn btn-danger">x</a>
                                 </div>
                             </div>
                         <?php endforeach ?>

@@ -90,12 +90,16 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .header-btn {
+    color: white;
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  cursor: pointer;
   gap: 5px;
 
   p {
@@ -303,7 +307,7 @@ header {
   padding-bottom: 25px;
 
   /* align-items: center; */
-  span {
+  a{
     cursor: pointer;
     height: 30px;
     display: flex;
@@ -313,7 +317,13 @@ header {
     border-bottom: 2px black solid;
     text-transform: uppercase;
     align-items: center;
+    text-decoration: none;
+    color: black;
   }
+}
+
+.item-card:hover{
+  scale: 1.01;
 }
 
 .items-to-show {
@@ -322,6 +332,9 @@ header {
   justify-content: space-between;
 
   .item-card {
+    transition: 0.15s ease-in;
+    color: black;
+    text-decoration: none;
     width: 318px;
     display: flex;
     flex-direction: column;

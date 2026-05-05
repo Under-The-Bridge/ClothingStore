@@ -9,7 +9,7 @@ main {
 }
 
 .items {
-    width: 100%;
+    width: 95%;
 }
 
 .item {
@@ -27,6 +27,7 @@ main {
 .content {
     display: flex;
     justify-content: space-between;
+    gap: 25px;
     /* border: 1px red solid !important;
 
     * {
@@ -38,12 +39,12 @@ main {
     width: 350px;
 }
 
-.item{
+.item {
     background-color: rgba(139, 139, 139, 0.05);
     border-radius: 15px;
 }
 
-.item-desc{
+.item-desc {
     width: 100%;
 }
 
@@ -71,4 +72,107 @@ main {
         width: 35px;
         height: 35px;
     }
+}
+
+.item-card:hover {
+    scale: 1.01;
+}
+
+
+.item-card {
+    padding: 10px;
+    transition: 0.15s ease-out;
+    display: flex;
+    justify-content: space-between;
+    color: #000000;
+    text-decoration: none;
+    /* box-sizing: border-box; */
+    border-radius: 15px;
+    box-shadow: 0px 0px 15px rgb(238, 238, 238);
+
+    >div:first-child {
+        display: flex;
+    }
+
+    >* {
+        padding: 10px 5px;
+    }
+
+    /* .btn {
+        border-radius: 10px;
+        width: 35px;
+        aspect-ratio: 1/1;
+        align-self: center;
+        color: white;
+        background: #49d0ff;
+        border: none;
+        background-image: url(../images/korzina.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+    } */
+
+    .btn {
+        border: none;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .btn.in {
+        filter: grayscale(0.75);
+    }
+
+    .star {
+        align-self: flex-end;
+        position: absolute;
+        font-size: 32px;
+        cursor: pointer;
+    }
+
+    .item-card-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 54px;
+
+        p {
+            height: 10px;
+        }
+
+        p:nth-child(1) {
+            font-family: ExtBold;
+            font-size: 19px;
+        }
+
+        p:nth-child(2) {
+            font-family: ExtRegular;
+            font-size: 14px;
+        }
+    }
+
+    img {
+        width: 159px;
+        height: 159px;
+    }
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-primary {
+    border: none !important;
+    background: #49d0ff !important;
+}
+
+.btn-danger {
+    border: none !important;
+    background: #ff4949 !important;
 }
