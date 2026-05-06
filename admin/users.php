@@ -17,6 +17,11 @@ if (mysqli_fetch_assoc(mysqli_query($conn, "select * from Users where id_user = 
 
 
 $items = mysqli_fetch_all(mysqli_query($conn, "select * from Users"), MYSQLI_ASSOC);
+
+if(isset($_GET["id"])){
+    $id = $_GET["id"];
+    mysqli_query($conn,"UPDATE `Users` SET `status_user`='Активен' WHERE id_user = $id");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +49,26 @@ $items = mysqli_fetch_all(mysqli_query($conn, "select * from Users"), MYSQLI_ASS
 
 <body>
     <div>
-        <?php include "../components/adminHeader.php" ?>
-        <table>
+    <?php include "../components/adminHeader.php" ?>
+    <div class="row g-0 container mx-auto mt-3">
+        <h4>Пользователи</h4>
+        <?php
+        $temp = 0;
+         foreach ($items as $item):     $temp++;?>
+              <div class="card p-2 mb-3" style="animation: show <?=$temp * 0.15?>s ease-in;">
+        <h5 class="card-title"><?= $item["email"] ?></h5>
+        <div class="d-flex">
+            <?php if($item["status_user"] == "Удален"):?>
+                <p class="link-danger me-2"><?= $item["status_user"] ?></p>
+                <a href="?id=<?=$item["id_user"] ?>">Восстановить аккаунт</a>
+                <?php else:?>
+                    <p class="link-success"><?= $item["status_user"] ?></p>
+                <?php endif;?>
+        </div>
+
+    </div>
+    <?php endforeach; ?>
+        <!-- <table>
             <tr>
                 <td>id</td>
                 <td>Почта</td>
@@ -57,7 +80,6 @@ $items = mysqli_fetch_all(mysqli_query($conn, "select * from Users"), MYSQLI_ASS
                 <td>Отчество</td>
                 <td>Редактировать</td>
             </tr>
-            <? foreach ($items as $item): ?>
                 <tr>
                     <td><?= $item["id_user"] ?></td>
                     <td><?= $item["email"] ?></td>
@@ -69,8 +91,7 @@ $items = mysqli_fetch_all(mysqli_query($conn, "select * from Users"), MYSQLI_ASS
                     <td><?= $item["patronymic"] ?></td>
                     <td><a href="users-edit.php?id=<?= $item["id_user"] ?>">Редактировать</a></td>
                 </tr>
-            <? endforeach; ?>
-        </table>
+        </table> -->
     </div>
 </body>
 

@@ -29,6 +29,9 @@ main{
     display: flex;
     justify-content: center;
 }
+.item-card{
+    height: 450px !important;
+}
 .items{
     display: flex;
     justify-content: center;

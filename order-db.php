@@ -11,8 +11,9 @@ $pay = $_POST["pay"];
 if (empty($address)) {
     echo "<script>
 alert('Пустой адрес');
-back();
+location.href='pages/order.php';
 </script>";
+exit();
 }
 
 $sql = "INSERT INTO `Orders`(`id_user`, `address`, `price`, `arrival_data`, `pay_method`) VALUES ('$id','$address','$price','$date','$pay')";

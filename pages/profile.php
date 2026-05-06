@@ -103,7 +103,7 @@ if (isset($_SESSION['id'])) {
                                 <div class="input-group has-validation">
                                     <div class="form-floating is-invalid">
                                         <input disabled type="email" class="form-control" id="floatingInputGroup2"
-                                            placeholder="Username" value="temp@temp.com" name="emailForm"
+                                            placeholder="Username" name="emailForm"
                                             value="<?= $user["email"] ?>">
                                         <label for="floatingInputGroup2">Email адрес:</label>
                                     </div>

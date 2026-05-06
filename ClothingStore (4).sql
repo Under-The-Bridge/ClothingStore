@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3307
--- Время создания: Апр 30 2026 г., 09:03
+-- Время создания: Май 06 2026 г., 14:17
 -- Версия сервера: 5.7.39-log
 -- Версия PHP: 8.1.9
 
@@ -33,14 +33,6 @@ CREATE TABLE `Addresses` (
   `address` varchar(100) COLLATE utf8mb4_bin DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
---
--- Дамп данных таблицы `Addresses`
---
-
-INSERT INTO `Addresses` (`id_address`, `id_user`, `address`) VALUES
-(1, 28, 'уксивт'),
-(2, 28, 'ыфвыфв');
-
 -- --------------------------------------------------------
 
 --
@@ -53,19 +45,6 @@ CREATE TABLE `Basket` (
   `id_user` int(11) DEFAULT NULL,
   `item_count` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
-
---
--- Дамп данных таблицы `Basket`
---
-
-INSERT INTO `Basket` (`id_basket`, `id_item`, `id_user`, `item_count`) VALUES
-(2, 1, 21, 10),
-(3, 2, 21, 11),
-(4, 3, 21, 16),
-(5, 6, 21, 18),
-(6, 1, 23, 15),
-(7, 1, 28, 2),
-(8, 4, 28, 2);
 
 -- --------------------------------------------------------
 
@@ -83,9 +62,9 @@ CREATE TABLE `Categories` (
 --
 
 INSERT INTO `Categories` (`id_category`, `name_category`) VALUES
-(1, 'shoes'),
-(3, 'humans'),
-(4, 'ramz');
+(1, 'Обувь'),
+(3, 'Шапки'),
+(4, 'Одежда');
 
 -- --------------------------------------------------------
 
@@ -109,19 +88,19 @@ CREATE TABLE `Item` (
 
 INSERT INTO `Item` (`id_item`, `name_item`, `price_item`, `img_item`, `description_item`, `status_item`, `id_category`) VALUES
 (1, 'Air Force 1 Ultra Flyknit', 4999, 'Air Force 1 Ultra Flyknit.svg', 'ну очень крутые кросы', 'Доступен', 1),
-(2, 'Football Shoes', 9999, 'Football Shoes.svg', 'крутые', 'Доступен', 1),
-(3, '13', 123, 'basketball_sport_icon_in_minimalist_3d_render_2 1.png', '123', 'Доступен', 1),
-(4, 'ffewfwefewf', 12312, 'e987ef42a259de0c46db18715cc2c93c27dcfb3e.png', '13213', 'Доступен', 1),
-(5, 'fdefff', 46547, 'beautiful-young-african-woman-sports-clothing-running-against-gray-background 1.png', 'jyfkjf', 'Доступен', 1),
-(6, 'vvdvd', 46543, 'Group 7.png', 'cvdvdvdv', 'Доступен', 1),
-(7, '222', 1233, 'jeans.png', '1eeded', 'Не доступен', 3),
-(8, '1986', 1986, 'sportsman-drinking-water-training-stationary-bike 1 (1).png', 'sdasd', 'Доступен', 3),
-(9, '3er', 333, 'cyclist-leads-actionfront-view-man-riding-bicycle-racing-road 1.png', 'ewr', 'Доступен', 3),
-(11, '234234', 444, 'red-ping-pong-racket-sports-equipment 1.png', 'dffd', 'Доступен', 4),
-(12, '9999', 9999, 'portrait-young-man-with-athlete-body-wears-casual-grey-clothes 2.png', '9999', 'Доступен', 3),
-(13, '666', 666, 'Group 345.png', '666', 'Доступен', 4),
-(14, '555', 555, 'Group 329.png', '555', 'Доступен', 4),
-(15, '213rr', 1, 'Amazon_logo_PNG3 1.png', 'trthrthr', 'Доступен', 4);
+(2, 'Football Shoes', 9999, 'Air Force 1 Ultra Flyknit.svg', 'крутые', 'Доступен', 4),
+(3, '135', 123, 'Air Force 1 Ultra Flyknit.svg', '123', 'Доступен', 1),
+(4, 'ffewfwefewf', 12312, 'Air Force 1 Ultra Flyknit.svg', '13213', 'Доступен', 1),
+(14, '555', 555, 'Air Force 1 Ultra Flyknit.svg', '555', 'Доступен', 4),
+(15, '213rr', 1, 'Air Force 1 Ultra Flyknit.svg', 'trthrthr', 'Доступен', 4),
+(16, 'Football Shoes', 2999, 'img.png', 'крутые', 'Доступен', 1),
+(17, 'Football Shoes', 2999, 'img.png', 'крутые', 'Доступен', 1),
+(18, 'Football Shoes', 2999, 'img.png', 'крутые', 'Доступен', 1),
+(19, 'Football Shoes', 2999, 'img.png', 'крутые', 'Доступен', 1),
+(20, 'Football Shoes', 2999, 'img.png', 'крутые', 'Доступен', 1),
+(21, 'ramz', 1999, 'img (12).png', '123', 'Доступен', 1),
+(22, '1231', 999, 'img (10).png', 'крутые', 'Доступен', 1),
+(23, 'ramz', 999, 'img (12).png', 'крутые', 'Не доступен', 1);
 
 -- --------------------------------------------------------
 
@@ -132,21 +111,21 @@ INSERT INTO `Item` (`id_item`, `name_item`, `price_item`, `img_item`, `descripti
 CREATE TABLE `Orders` (
   `id_order` int(11) NOT NULL,
   `id_user` int(11) DEFAULT NULL,
-  `adress` text COLLATE utf8mb4_bin NOT NULL,
+  `address` text COLLATE utf8mb4_bin NOT NULL,
   `price` int(11) DEFAULT NULL,
   `data_order` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `arrival_data` date DEFAULT NULL,
   `pay_method` enum('СБП','По карте') COLLATE utf8mb4_bin NOT NULL DEFAULT 'СБП',
-  `status` enum('Новый','Подтвержден','Отменен','Получен') COLLATE utf8mb4_bin NOT NULL DEFAULT 'Новый'
+  `status` enum('В обработке','Подтвержден','Отменен','Получен') COLLATE utf8mb4_bin NOT NULL DEFAULT 'В обработке'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Дамп данных таблицы `Orders`
 --
 
-INSERT INTO `Orders` (`id_order`, `id_user`, `adress`, `price`, `data_order`, `arrival_data`, `pay_method`, `status`) VALUES
-(14, 28, 'уксивт', 151945, '2026-04-30 02:47:37', '1233-03-12', 'По карте', 'Новый'),
-(15, 28, 'ыфвыфв', 14998, '2026-04-30 03:32:48', '5555-05-05', 'СБП', 'Новый');
+INSERT INTO `Orders` (`id_order`, `id_user`, `address`, `price`, `data_order`, `arrival_data`, `pay_method`, `status`) VALUES
+(16, 30, 'Уксивт', 15000, '2026-05-06 10:51:41', '2222-02-22', 'СБП', 'В обработке'),
+(18, 30, 'Рамзу', 24993, '2026-05-06 11:13:01', '2026-05-07', 'СБП', 'В обработке');
 
 -- --------------------------------------------------------
 
@@ -166,11 +145,11 @@ CREATE TABLE `Order_Item` (
 --
 
 INSERT INTO `Order_Item` (`id_Order_Item`, `id_item`, `id_order`, `count`) VALUES
-(5, 4, 14, 1),
-(6, 5, 14, 1),
-(7, 6, 14, 2),
-(8, 1, 15, 1),
-(9, 2, 15, 1);
+(10, 1, 16, 3),
+(11, 15, 16, 3),
+(13, 1, 18, 3),
+(14, 21, 18, 2),
+(15, 20, 18, 2);
 
 -- --------------------------------------------------------
 
@@ -180,28 +159,24 @@ INSERT INTO `Order_Item` (`id_Order_Item`, `id_item`, `id_order`, `count`) VALUE
 
 CREATE TABLE `Users` (
   `id_user` int(11) NOT NULL,
-  `password_user` varchar(25) COLLATE utf8mb4_bin NOT NULL,
+  `password_user` text COLLATE utf8mb4_bin NOT NULL,
   `email` varchar(50) COLLATE utf8mb4_bin NOT NULL,
   `phone` varchar(10) COLLATE utf8mb4_bin DEFAULT NULL,
   `status_user` enum('Активен','Удален') COLLATE utf8mb4_bin DEFAULT 'Активен',
   `name` varchar(25) COLLATE utf8mb4_bin DEFAULT NULL,
   `surname` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
-  `patronymic` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL
+  `patronymic` varchar(50) COLLATE utf8mb4_bin DEFAULT NULL,
+  `role` enum('user','admin') COLLATE utf8mb4_bin NOT NULL DEFAULT 'user'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
 
 --
 -- Дамп данных таблицы `Users`
 --
 
-INSERT INTO `Users` (`id_user`, `password_user`, `email`, `phone`, `status_user`, `name`, `surname`, `patronymic`) VALUES
-(21, 'ramz@ramz', 'ramz@ramz', 'каукуку', 'Активен', 'Рамз', 'Рамз', 'Рамз'),
-(22, '3@2', '', '8979878', 'Активен', 'Рамз', 'Рамз', 'Рамз'),
-(23, '123', '123@123', '123', 'Активен', '123', '123', '123'),
-(24, '', 'we@we', '123', 'Активен', '654', 'i', 'o;op;'),
-(25, '', 'se@rr', '123', 'Активен', '654', 'i', 'o;op;'),
-(26, 'we', 'we@w', 'we', 'Активен', 'we', 'we', 'we'),
-(27, '3@2', 'dw@w', '8979878', 'Активен', 'Рамз', 'Рамз', 'Рамз'),
-(28, 'qwe', 'ramazanikbaev6@gmail.com', NULL, 'Активен', NULL, NULL, NULL);
+INSERT INTO `Users` (`id_user`, `password_user`, `email`, `phone`, `status_user`, `name`, `surname`, `patronymic`, `role`) VALUES
+(29, '$2y$10$zENjl59jda5PGGDPfxz/EuDvLu249zi/U2a2ewDprMs0SSTDh.LSC', 'admin@admin.admin', NULL, 'Активен', NULL, NULL, NULL, 'admin'),
+(30, '$2y$10$BEMOqcq44GvBmjCG/7Iq1egYB4dEGH6sOnw.qSCxx2x8mz0JwoqKu', 'ramazanikbaev6@gmail.com', NULL, 'Активен', NULL, NULL, NULL, 'user'),
+(31, '$2y$10$wxFUuEoW8swMskkud0wlsOhjQPzMgFvKDoRcEJ2sLiJDjHWneAzRm', 'r@r', NULL, 'Активен', NULL, NULL, NULL, 'user');
 
 -- --------------------------------------------------------
 
@@ -290,37 +265,37 @@ ALTER TABLE `Addresses`
 -- AUTO_INCREMENT для таблицы `Basket`
 --
 ALTER TABLE `Basket`
-  MODIFY `id_basket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_basket` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `Categories`
 --
 ALTER TABLE `Categories`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT для таблицы `Item`
 --
 ALTER TABLE `Item`
-  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT для таблицы `Orders`
 --
 ALTER TABLE `Orders`
-  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_order` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT для таблицы `Order_Item`
 --
 ALTER TABLE `Order_Item`
-  MODIFY `id_Order_Item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_Order_Item` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `Users`
 --
 ALTER TABLE `Users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT для таблицы `User_favorites`

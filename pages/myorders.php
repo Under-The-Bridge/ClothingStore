@@ -86,6 +86,7 @@ $orders = mysqli_fetch_all(mysqli_query($conn, "select * from Orders where id_us
                             <div id="table">
                                 <table>
                                     <tr>
+                                        <td>ЗАКАЗ</td>
                                         <td>АДРЕС</td>
                                         <td>СУММА</td>
                                         <td>ДАТА ДОСТАВКИ</td>
@@ -96,6 +97,7 @@ $orders = mysqli_fetch_all(mysqli_query($conn, "select * from Orders where id_us
                                     <?php foreach ($orders as $order):
                                         $order_id = $order[0] ?>
                                         <tr>
+                                            <td><a href="inorder.php?id=<?= $order[0] ?>">Подробнее</a></td>
                                             <td><?= $order[2] ?></td>
                                             <td><?= $order[3] ?></td>
                                             <td><?= $order[5] ?></td>

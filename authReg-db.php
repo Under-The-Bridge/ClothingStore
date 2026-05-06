@@ -58,6 +58,12 @@ else {
     // Данные пользователя с формы
     $emailUser = trim($_POST['emailForm']);
     $passwordUser = trim($_POST['passwordForm']);
+    if(empty($passwordUser) || empty($emailUser)){
+                echo "<script>
+            alert(\"Пустые поля!\");
+            location.href='pages/authorization.php';
+            </script>";
+    }
     // Проверка на уникальность почты/логина
     $queryUser = mysqli_query($conn, "SELECT * FROM `users` WHERE `email`='$emailUser'");
     if (mysqli_num_rows($queryUser) > 0) {

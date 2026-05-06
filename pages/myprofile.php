@@ -108,33 +108,25 @@ $orders = mysqli_fetch_all(mysqli_query($conn, "select * from Orders where id_us
                             <!-- <div id="orderHistory" style="width: 1061px"> -->
                                 <div id="table">
                                     <table>
-                                        <tr>
-                                            <td>АДРЕС</td>
-                                            <td>СУММА</td>
-                                            <td>ДАТА ДОСТАВКИ</td>
-                                            <td>СПОСОБ ОПЛАТЫ</td>
-                                            <td>СТАТУС</td>
-                                        </tr>
+                                       <tr>
+                                        <td>ЗАКАЗ</td>
+                                        <td>АДРЕС</td>
+                                        <td>СУММА</td>
+                                        <td>ДАТА ДОСТАВКИ</td>
+                                        <td>СПОСОБ ОПЛАТЫ</td>
+                                        <td>СТАТУС</td>
+                                    </tr>
 
-                                        <?php foreach ($orders as $order):
-                                            $order_id = $order[0] ?>
-                                            <tr>
-                                                <td>
-                                                    <?= $order[2] ?>
-                                                </td>
-                                                <td>
-                                                    <?= $order[3] ?>
-                                                </td>
-                                                <td>
-                                                    <?= $order[5] ?>
-                                                </td>
-                                                <td>
-                                                    <?= $order[6] ?>
-                                                </td>
-                                                <td>
-                                                    <?= $order[7] ?>
-                                                </td>
-                                            </tr>
+                                    <?php foreach ($orders as $order):
+                                        $order_id = $order[0] ?>
+                                        <tr>
+                                            <td><a href="inorder.php?id=<?= $order[0] ?>">Подробнее</a></td>
+                                            <td><?= $order[2] ?></td>
+                                            <td><?= $order[3] ?></td>
+                                            <td><?= $order[5] ?></td>
+                                            <td><?= $order[6] ?></td>
+                                            <td><?= $order[7] ?></td>
+                                        </tr>
                                             <!-- <tr>
                                             <td> <a data-bs-toggle="collapse" href="#q<?= $order_id ?>" role="button"
                                                     aria-expanded="false" aria-controls="q<?= $order_id ?>">

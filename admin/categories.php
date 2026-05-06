@@ -15,6 +15,16 @@ if (mysqli_fetch_assoc(mysqli_query($conn, "select * from Users where id_user = 
     </script>";
 }
 
+if(isset($_POST["id"])){
+    $cat = trim($_POST["category"]);
+    if(empty($cat)){
+        echo "<script>
+    alert(\"Пустое поле!\");
+    </script>";
+    }
+
+    mysqli_query($conn,"UPDATE `Categories` SET `name_category`='$cat' WHERE id_category =".$_POST["id"]);
+}
 
 $categories = mysqli_fetch_all(mysqli_query($conn, "select * from Categories"), MYSQLI_ASSOC);
 
@@ -46,29 +56,32 @@ $categories = mysqli_fetch_all(mysqli_query($conn, "select * from Categories"), 
 <body>
     <div>
         <?php include "../components/adminHeader.php" ?>
-        <table>
-            <tr>
-                <td>id</td>
-                <td>Название</td>
-                <td>Редактировать</td>
-            </tr>
-            <? foreach ($categories as $category): ?>
-                <tr>
-                    <td><?= $category["id_category"] ?></td>
-                    <td><?= $category["name_category"] ?></td>
-                    <td><a href="categories-edit.php?id=<?= $category["id_category"] ?>">Редактировать</a></td>
-                </tr>
-            <? endforeach; ?>
-        </table>
-        <div id="addPanel">
+                <div class="container mx-auto mt-3">
+                    <h4>Категории</h4>
             <form method="post" action="categories-db.php">
                 <div class="mb-3">
                     <label for="name" class="form-label">Название категории</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="name" required>
                 </div>
                 <button name="btnAdd" type="submit" class="btn btn-primary">Добавить</button>
             </form>
         </div>
+        <div class="row g-0 container mx-auto mt-3">
+
+            <?php 
+            $temp = 0;
+            foreach ($categories as $category): $temp++;?>
+                  <div class="card p-2 mb-2" style="animation: show <?=$temp * 0.15?>s ease-in;">
+            <h5 class="card-title d-flex"><?= $category["name_category"] ?> </h5>
+            <form method="post"> 
+                <input type="hidden" name="id" value="<?= $category["id_category"] ?>">
+                <input type="text" name="category">
+                <button class="btn btn-primary">Изменить</button>
+            </form>
+                </div>
+        <?php endforeach; ?>
+        </div>
+
     </div>
 </body>
 
