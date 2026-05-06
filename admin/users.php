@@ -20,7 +20,7 @@ $items = mysqli_fetch_all(mysqli_query($conn, "select * from Users"), MYSQLI_ASS
 
 if(isset($_GET["id"])){
     $id = $_GET["id"];
-    mysqli_query($conn,"UPDATE `Users` SET `status_user`='Активен' WHERE id_user = $id");
+    mysqli_query($conn,"UPDATE `Users` SET `status_user`='Активен' WHERE id_user = $id and role = 'user'");
 }
 ?>
 <!DOCTYPE html>
