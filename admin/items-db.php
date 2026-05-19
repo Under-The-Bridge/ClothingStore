@@ -48,7 +48,7 @@ if (isset($_POST["btnAdd"])) {
 } else if (isset($_POST["btnEdit"])) {
     $sql = "UPDATE `Item` SET `name_item`='$name',`price_item`='$price',`description_item`='$desc',`status_item`='$status',`id_category`='$category' WHERE `id_item` = $id";
     $query = mysqli_query($conn, $sql);
-    header("Location: /admin/items-edit.php?id=$id");
+    header("Location: /admin/items.php");
 }
 
 ?>

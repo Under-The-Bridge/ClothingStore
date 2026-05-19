@@ -1,8 +1,8 @@
 <?php
 require "../connect-db.php";
 session_start();
-if(!isset($_SESSION['id'])){
-        echo "<script>
+if (!isset($_SESSION['id'])) {
+    echo "<script>
     alert(\"Нельзя!\");
     location.href='/';
     </script>";
@@ -15,15 +15,23 @@ if (mysqli_fetch_assoc(mysqli_query($conn, "select * from Users where id_user = 
     </script>";
 }
 
-if(isset($_POST["id"])){
-    $cat = trim($_POST["category"]);
-    if(empty($cat)){
-        echo "<script>
-    alert(\"Пустое поле!\");
-    </script>";
+if (isset($_GET['del'])) {
+    if ($_GET['del'] == 0) {
+        mysqli_query($conn, "UPDATE `Categories` SET `status`='Удален' where id_category = " . $_GET["id"]);
+    } else {
+        mysqli_query($conn, "UPDATE `Categories` SET `status`='Активен' where id_category = " . $_GET["id"]);
     }
-
-    mysqli_query($conn,"UPDATE `Categories` SET `name_category`='$cat' WHERE id_category =".$_POST["id"]);
+}
+if (isset($_POST["id"])) {
+    $cat = trim($_POST["category"]);
+    if (empty($cat)) {
+        echo "<script>
+        alert(\"Пустое поле!\");
+        window.document.back();
+        </script>";
+    } else {
+        mysqli_query($conn, "UPDATE `Categories` SET `name_category`='$cat' WHERE id_category =" . $_POST["id"]);
+    }
 }
 
 $categories = mysqli_fetch_all(mysqli_query($conn, "select * from Categories"), MYSQLI_ASSOC);
@@ -40,7 +48,7 @@ $categories = mysqli_fetch_all(mysqli_query($conn, "select * from Categories"), 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/style.css">
     <link rel="stylesheet" href="../styles/adminStyle.css">
     <title>Document</title>
     <style>
@@ -56,8 +64,8 @@ $categories = mysqli_fetch_all(mysqli_query($conn, "select * from Categories"), 
 <body>
     <div>
         <?php include "../components/adminHeader.php" ?>
-                <div class="container mx-auto mt-3">
-                    <h4>Категории</h4>
+        <div class="container mx-auto mt-3">
+            <h4>Категории</h4>
             <form method="post" action="categories-db.php">
                 <div class="mb-3">
                     <label for="name" class="form-label">Название категории</label>
@@ -68,18 +76,25 @@ $categories = mysqli_fetch_all(mysqli_query($conn, "select * from Categories"), 
         </div>
         <div class="row g-0 container mx-auto mt-3">
 
-            <?php 
+            <?php
             $temp = 0;
-            foreach ($categories as $category): $temp++;?>
-                  <div class="card p-2 mb-2" style="animation: show <?=$temp * 0.15?>s ease-in;">
-            <h5 class="card-title d-flex"><?= $category["name_category"] ?> </h5>
-            <form method="post"> 
-                <input type="hidden" name="id" value="<?= $category["id_category"] ?>">
-                <input type="text" name="category">
-                <button class="btn btn-primary">Изменить</button>
-            </form>
+            foreach ($categories as $category):
+                $temp++; ?>
+                <div class="card p-2 mb-2" style="animation: show <?= $temp * 0.15 ?>s ease-in;">
+                    <h5 class="card-title d-flex"><?= $category["name_category"] ?> </h5>
+                    <form method="post">
+                        <input type="hidden" name="id" value="<?= $category["id_category"] ?>">
+                        <input type="text" name="category">
+                        <button name="btnEdit" class="btn btn-primary">Изменить</button>
+                        <?php if ($category["status"] == "Активен"): ?>
+                            <a href="?id=<?= $category["id_category"] ?>&del=0" class="btn btn-danger">Удалить</a>
+                        <?php else: ?>
+                            <a href="?id=<?= $category["id_category"] ?>&del=1" class="btn btn-danger">Восстановить</a>
+                            <?php endif; ?>
+                            <span><?= $category["status"] ?></span>
+                    </form>
                 </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
         </div>
 
     </div>

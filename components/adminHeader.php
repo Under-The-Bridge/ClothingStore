@@ -5,6 +5,7 @@
         <a class="header-btn" href="users.php">Пользователи</a>
         <a class="header-btn" href="items.php">Товары</a>
         <a class="header-btn" href="items-add.php">Добавить товар</a>
+        <a class="header-btn" href="orders.php">Заказы пользователей</a>
         <a class="header-btn" href="logout.php">Выйти</a>
     </div>
 </header>
